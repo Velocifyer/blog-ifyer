@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Blog-𝕚𝕗𝕪𝕖𝕣</title>
+    <subtitle>𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣's blog</subtitle>
+    <link href="https://blog.velocifyer.com/Posts/feed.atom" rel="self"/>
+    <link href="https://blog.velocifyer.com/"/>
+    <!-- 1-based index unfortunately -->
+    <updated>2025-09-12T12:00:00Z</updated>
+    <id>https://blog.velocifyer.com/Posts/feed.atom</id>
+    <author>
+        <name>𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣</name>
+    </author>
+
+    <entry>
+        <title>Hello, World</title>
+        <link href="https://blog.velocifyer.com/Posts/2025-8-8+Hello,+World.html"/>
+        <id>https://blog.velocifyer.com/Posts/2025-8-8+Hello,+World.html</id>
+        <!-- 1-based index unfortunately -->
+        <updated>2025-09-12T15:54:16-04:00</updated>
+        <summary>Welcome to my blog!</summary>
+        <content type="html">
+            &lt;!doctype html&gt;
+                        &lt;html lang=&quot;en-US&quot;&gt;
+                            &lt;head&gt;
+                                &lt;meta charset=&quot;utf-8&quot;&gt;
+                                &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+                                &lt;title&gt;Hello, World&lt;/title&gt;
+                                &lt;link rel=&quot;icon&quot; href=&quot;https://blog.velocifyer.com/Assets/Images/spacetoad.jpg&quot; type=&quot;image/jpeg&quot;&gt;
+                                &lt;meta name=&quot;darkreader-lock&quot;&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;h3&gt;2025-8-8 (September 9th, 2025)&lt;/h3&gt;
+                                &lt;p&gt;Welcome to my blog!&lt;/p&gt;
+                                This is my first post.
+                                &lt;br&gt;
+                                On this blog I will discuss important stuff like:
+                                &lt;ul&gt;
+                                    &lt;li&gt;Technology&lt;/li&gt;
+                                    &lt;li&gt;Computers&lt;/li&gt;
+                                    &lt;li&gt;HTML&lt;/li&gt;
+                                    &lt;li&gt;Blog-𝕚𝕗𝕪𝕖𝕣&lt;/li&gt;
+                                    &lt;li&gt;Hot Dogs&lt;/li&gt;
+                                    &lt;li&gt;Food&lt;/li&gt;
+                                    &lt;li&gt;Pasta&lt;/li&gt;
+                                &lt;/ul&gt;
+                                &lt;hr&gt;
+                                &lt;small&gt;
+                                    Except for the favicon and javascript, this is licensed CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣.&lt;br&gt;
+                                    This website is avalible on &lt;a href=&quot;https://codeberg.org/Velocifyer/Blog-ifyer&quot;&gt;Codeberg&lt;/a&gt;. Make a issue or merge request if it would be usefull.
+                                &lt;/small&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+        </content>
+    </entry>
+    <entry>
+        <title>Firefox is falling behind (not in market share)</title>
+        <link href="https://blog.velocifyer.com/Posts/0,1,2025-8-9,Firefox+is+falling+behind.html"/>
+        <id>https://blog.velocifyer.com/Posts/0,1,2025-8-9,Firefox+is+falling+behind.html</id>
+        <!-- 1-based index unfortunately -->
+        <updated>2025-09-12T16:04:00-04:00</updated>
+        <summary>TLDR: Firefox is not implementing new web standards</summary>
+        <content type="html">
+            &lt;!doctype html&gt;
+                        &lt;html lang=&quot;en-US&quot;&gt;
+                            &lt;head&gt;
+                                &lt;meta charset=&quot;utf-8&quot;&gt;
+                                &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+                                &lt;title&gt;Firefox is falling behind (not in market share)&lt;/title&gt;
+                                &lt;link href=&quot;https://blog.velocifyer.com/Assets/Fonts/Noto/Sans/2025-8-3/file.css&quot; rel=&quot;stylesheet&quot;&gt;
+                                &lt;link rel=&quot;icon&quot; href=&quot;https://blog.velocifyer.com/Assets/Images/spacetoad.jpg&quot; type=&quot;image/jpeg&quot;&gt;
+                                &lt;!-- This uses a AGPL licensed backend, email velocifyer at velocifyer.com for the code and license --&gt;
+                                &lt;meta
+                                    name=&quot;description&quot;
+                                    content=&quot;TLDR: Firefox is not implementing new web standards&quot;
+                                &gt;
+                                &lt;meta name=&quot;darkreader-lock&quot;&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;h3&gt;2025-8-9 (September 10th, 2025)&lt;/h3&gt;
+                                &lt;h4&gt;TLDR: Firefox is not implementing new web standards&lt;/h4&gt;
+                                &lt;p&gt;
+                                    &lt;!-- TODO: fix line spacing --&gt;
+                                    Firefox is a great browser, but it's not implementing new web standards.&lt;br&gt;
+                                    I want to use WebUSB and WebSerial to flash devices, but Firefox won't let me.&lt;br&gt;
+                                    I want to use Speculation Rules to reduce latency, but Firefox won't let me.&lt;br&gt;
+                                &lt;/p&gt;
+                                &lt;p&gt;
+                                    Because of Firefox not supporting new web standards, users will switch to the much worse chromium.
+                                &lt;/p&gt;
+                                &lt;p&gt;
+                                    Here is an incomplete list of things that are missing from Firefox that are in Chromium:
+                                    &lt;ul&gt;                         &lt;!-- TODO: make this part condensed --&gt;
+                                        &lt;li&gt;WebUSB and WebSerial (the reason it is missing is a alleged security risk for people who ignore warnings)&lt;/li&gt;
+                                        &lt;li&gt;Speculation Rules&lt;/li&gt;
+                                        &lt;li&gt;Certain referer policies&lt;/li&gt;
+                                        &lt;li&gt;User-Agent Client Hints API&lt;/li&gt;
+                                        &lt;li&gt;WebGPU (outside of Microsoft Losedows)&lt;/li&gt;
+                                    &lt;/ul&gt;
+                                &lt;/p&gt;
+                                &lt;p&gt;
+                                    Here is an incomplete list of things missing in Firefox that are not in Chromium ranked by usefulness:
+                                    &lt;ol start=&quot;0&quot;&gt;
+                                        &lt;li&gt;JPEG XL&lt;/li&gt;
+                                        &lt;li&gt;0-based index on ordered lists by default&lt;/li&gt;
+                                    &lt;/ol&gt;
+                                &lt;/p&gt;
+                                &lt;hr&gt;
+                                &lt;a href=&quot;https://news.ycombinator.com/item?id=45202715&quot;&gt;View/Comment/Upvote on Hacker News&lt;/a&gt;
+                                &lt;hr&gt;
+                                &lt;small&gt;
+                                    Except for the favicon and javascript and the font, this is licensed CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣.&lt;br&gt;
+                                    The font used on this website is Noto Sans, which uses &lt;a href=&quot;/Assets/Fonts/Noto/Sans/2025-8-3/License.txt&quot;&gt;this license&lt;/a&gt;.&lt;br&gt;
+                                    This blog is avalible on &lt;a href=&quot;https://codeberg.org/Velocifyer/Blog-ifyer&quot;&gt;Codeberg&lt;/a&gt;. Make a issue or merge request if it would be useful.&lt;br&gt;
+                                    We have not knowingly sent logs of blog-ifyer to third parties. Click &lt;a href=&quot;https://files.velocifyer.com/Warant%20canaries/&quot; referrerpolicy=&quot;no-referrer-when-downgrade&quot;&gt;here&lt;/a&gt; to get PGP signed canaries. See Cloudflare's warranty canary &lt;a href=&quot;https://www.cloudflare.com/transparency/&quot;&gt;here&lt;/a&gt;
+                                &lt;/small&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+        </content>
+    </entry>
+    <entry>
+        <title>0-based indexes are the best</title>
+        <link href="https://blog.velocifyer.com/Posts/0,2,2025-8-10,0-based-indexes+are+the+best.html"/>
+        <id>https://blog.velocifyer.com/Posts/0,2,2025-8-10,0-based-indexes+are+the+best.html</id>
+        <!-- 1-based index unfortunately -->
+        <updated>2025-09-12T16:20:00-04:00</updated>
+        <summary>Here's why you should use 0-based indexes</summary>
+        <content type="html">
+            &lt;!doctype html&gt;
+                        &lt;html lang=&quot;en-US&quot;&gt;
+                            &lt;head&gt;
+                                &lt;meta charset=&quot;utf-8&quot;&gt;
+                                &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+                                &lt;title&gt;0-Based indexes are the best&lt;/title&gt;
+                                &lt;link href=&quot;https://files.velocifyer.com/Warant%20canaries/&quot; rel=&quot;dns-prefetch&quot;&gt;
+                                &lt;meta
+                                    name=&quot;description&quot;
+                                    content=&quot;Here's why you should use 0-based indexes&quot;
+                                &gt;
+                                &lt;meta name=&quot;darkreader-lock&quot;&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;h3&gt;2025-8-10 (September 11th, 2025)&lt;/h3&gt;
+                                &lt;h4&gt;TLDR: use 0-based indexes now and in the future (and in the past if you can)&lt;/h4&gt;
+                                &lt;p&gt;
+                                    &lt;!-- TODO: fix line spacing --&gt;
+                                    I get so annoyed when indexes aren't 0-based. &lt;br&gt;
+                                    Indexes should be 0-based. A 1-based index confuses me (and many other people) because i'm used to 0-based indexes, and so are many people.&lt;br&gt;
+                                    That's why i write 11th september 2025 as &quot;2025-8-10&quot;
+                                &lt;/p&gt;
+                                &lt;p&gt;Here is what a 0 based index looks like:&lt;/p&gt;
+                                    &lt;ol start=&quot;0&quot;&gt;
+                                        &lt;li&gt;Blog-ifyer&lt;/li&gt;
+                                        &lt;li&gt;Pasta&lt;/li&gt;
+                                        &lt;li&gt;Hot dogs&lt;/li&gt;
+                                    &lt;/ol&gt;
+                                Here is what a 1 based index looks like:
+                                    &lt;ol start=&quot;1&quot;&gt;
+                                        &lt;li&gt;Blog-ifyer&lt;/li&gt;
+                                        &lt;li&gt;Pasta&lt;/li&gt;
+                                        &lt;li&gt;Hot dogs&lt;/li&gt;
+                                    &lt;/ol&gt;
+                                    At least dont use 0.5 based indexes.
+                                &lt;hr&gt;
+                                    &lt;a href=&quot;https://news.ycombinator.com/item?id=45221920&quot;&gt;View/Comment/Upvote on Hacker News (The people there incorrectly think i'm trolling)&lt;/a&gt;
+                                &lt;hr&gt;
+                                &lt;small&gt;
+                                    This is licensed CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣.&lt;br&gt;
+                                    This blog is avalible on &lt;a href=&quot;https://codeberg.org/Velocifyer/Blog-ifyer&quot;&gt;Codeberg&lt;/a&gt;. Make a issue or merge request if it would be useful.&lt;br&gt;
+                                    I have not knowingly sent logs of blog-ifyer to third parties. Click &lt;a href=&quot;https://files.velocifyer.com/Warant%20canaries/&quot; referrerpolicy=&quot;no-referrer-when-downgrade&quot;&gt;here&lt;/a&gt; to get PGP signed canaries. See Cloudflare's warranty canary &lt;a href=&quot;https://www.cloudflare.com/transparency/&quot;&gt;here&lt;/a&gt;
+                                &lt;/small&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+        </content>
+    </entry>
+</feed>
