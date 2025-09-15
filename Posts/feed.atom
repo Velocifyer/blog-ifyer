@@ -172,4 +172,12 @@
                         &lt;/html&gt;
         </content>
     </entry>
+    <entry>
+        <title>How to self-host a web font from Google Fonts</title>
+        <link href="https://blog.velocifyer.com/Posts/3,0,0,2025-8-13,+how+to+self+host+a+font+from+google+fonts.html"/>
+        <id>https://blog.velocifyer.com/Posts/3,0,0,2025-8-13,+how+to+self+host+a+font+from+google+fonts.html</id>
+        <!-- 1-based index unfortunately -->
+        <updated>2025-09-15T12:29:00-04:00</updated>
+        <summary>Here's how to self host Google Fonts</summary>
+    </entry>
 </feed>
