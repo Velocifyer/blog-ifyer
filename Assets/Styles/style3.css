@@ -21,11 +21,13 @@ h1 {
     text-shadow: 3px 3px 1px black;
 }
 
-p,
+p{
+    line-height: 1.25;
+}
 li {
+    letter-spacing: 1px;
     font-size: 16px;
     line-height: 2;
-    letter-spacing: 1px;
     margin: 0;
     padding: 0;
 }
