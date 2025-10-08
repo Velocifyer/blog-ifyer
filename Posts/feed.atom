@@ -180,4 +180,13 @@
         <updated>2025-09-15T12:29:00-04:00</updated>
         <summary>Here's how to self host Google Fonts</summary>
     </entry>
+    <entry>
+        <title>Jailbreaking computers shouldn't exist</title>
+        <link href="https://blog.velocifyer.com/Posts/4%2C0%2C2025%2B9%2B7%2CJailbreaking%20should%20not%20exist.html"/>
+        <id>https://blog.velocifyer.com/Posts/4%2C0%2C2025%2B9%2B7%2CJailbreaking%20should%20not%20exist.html</id>
+        <!-- 1-based index unfortunately -->
+        <!-- I don't want to fix that time -->
+        <updated>2025-10-08T12:29:00-04:00</updated>
+        <summary>Computers should let the user do whatever they want easily. Anything else is a anti-feature.</summary>
+    </entry>
 </feed>
