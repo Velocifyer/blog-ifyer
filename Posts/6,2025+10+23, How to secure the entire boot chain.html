@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width"/>
+        <title>How to secure the entire boot chain | Blog-𝕚𝕗𝕪𝕖𝕣</title>
+        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
+        <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="preload" as="style"/>
+        <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="stylesheet"/>
+        <link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
+        <link href="/" rel="prefetch"/>
+        <link href="https://files.velocifyer.com/Warant%20canaries/" rel="dns-prefetch"/>
+        <link rel="alternate" type="application/atom+xml" href="feed.atom"/>
+        <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="preload" as="style"/>
+        <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="stylesheet"/>
+        <link rel="me" href="https://mastodon.social/@Velocifyer"/>
+        <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
+        <!-- This uses a AGPL licensed backend, email velocifyer at velocifyer.com for the code and license -->
+        <script defer data-domain="blog.velocifyer.com" src="https://plausible.velocifyer.com/js/script.file-downloads.hash.outbound-links.js"></script>
+        <meta
+            name="description"
+            content="How to set up secure boot on Arch Linux - blog-ifyer"
+        />
+        <meta name="darkreader-lock"/>
+    </head>
+    <body style="width: 55em;">
+        <a class="link" href="/"><h1>Blog-𝕚𝕗𝕪𝕖𝕣</h1></a>
+        <h2>How to secure the entire boot chain</h2>
+        <h4>2025+10+20</h4>
+        <p>
+            Normaly on arch linux there is no way to know wheater someone took out your ssd and modified the files on the ESP or the root partition.
+            By encrypting the root partition you can prevent modifications to it but the ESP has to stay unencrypted.<br/>
+            So we will use secure boot (with our own keys) and unified kernel images to prevent tampering with the kernel and initramfs and TPM to verify that secure boot was not disabled.<br/>
+            After following this guide, you will not have to manualy sign files with secure boot.<br/>
+            <small><STRONG>I AM NOT RESPONSIBLE FOR YOU BREAKING STUFF BY FOLLOWING THIS GUIDE!!</STRONG></small>
+        </p>
+        <p>
+            This guide assumes you already installed archlinux with a ESP mounted at /boot/ that is located at /dev/nvme0n1p1 and a LUKS2 encryped root partition that is located at <code>/dev/nvme0n1p2</code>and are using mkintcpio and the `linux` kernel and the fish shell and you have sudo installed and set up to let you execute commands as root.
+        </p>
+        
+            <h2>Set up unified kernel images.</h2>
+        <ol start="0">
+            <li>Install `<code>tpm2-tss</code>` with pacman.</li>
+            <li>Set the contents of /etc/kernel/cmdline to:
+                <code>rd.luks.name=uuid=root root=/dev/mapper/root rw zswap.enabled=0 rd.luks.options=tpm2-device=auto,tpm2-measure-pcr=yes</code> replacing uuid with the UUID of the LUKS2 root partition.</li>
+            <li>Set /etc/mkinitcpio.d/linux.preset to <code><pre># mkinitcpio preset file for the 'linux' package
+            
+#ALL_config="/etc/mkinitcpio.conf"
+ALL_kver="/boot/vmlinuz-linux"
+            
+PRESETS=('default' 'fallback')
+            
+#default_config="/etc/mkinitcpio.conf"
+default_image="/boot/initramfs-linux.img"
+default_uki="/boot/EFI/Linux/arch-linux.efi"
+default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
+            
+#fallback_config="/etc/mkinitcpio.conf"
+fallback_image="/boot/initramfs-linux-fallback.img"
+fallback_uki="/boot/EFI/Linux/arch-linux-fallback.efi"
+fallback_options="-S autodetect"
+</pre></code></li>
+        <li>
+            Set the hooks line in /etc/mkinitcpio.conf to <code>HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)</code>.
+        </li>
+        <li>
+            Run <code>sudo mkdir -p /boot/EFI/Linux</code>.
+        </li>
+        <li>
+            Run <code>sudo mkinitcpio -P</code>.
+        </li>
+        <li>Run <code>sudo efibootmgr --create --disk /dev/nvme0n1p1 --part 1 --label "Arch Linux" --loader '\EFI\Linux\arch-linux.efi' --unicode</code>.</li>
+        <li>
+            Reboot.
+        </li>
+        </ol>
+        <h2>Set up UEFI for secure boot.</h2>
+        The exact steps for this depend on your hardware.<br/>
+        Enter your UEFI firmware. If it has a option to delete specific keys than delete the Platform key and all microsoft keys. You may also delete the device manufactuer's keys but i do not recommend it because it may make firmware updates harder. If your UEFI does not let you delete specific keys than just delete all of them.<br/>
+        Then set a “Administrator Password” in your UEFI firmware configurator and store the password somewhere safe. You may have to enable secuer boot in this step.
+        <h2>Set up secure boot with sbctl</h2>
+        <ol start="0">
+            <li>Install the sbctl pacman package</li>
+            <li>Run `sudo sbctl create-keys`.</li>
+            <li>Run <code>sudo mkinitcpio -P</code>.</li>
+            <li>Run <code>sudo sbctl enroll-keys -f --yes-this-might-brick-my-machine</code></li>
+            <li>Enable enforcement of secure boot in UEFI</li>
+            <li>Reboot</li>
+        </ol>
+        <h2>Set up TPM based decryption of the root partition.</h2>
+        <ol start="0">
+            <li>Run <code>sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=password --recovery-key</code> and save the recovery key securly.</li>
+            <li>Run <code>sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 --tpm2-with-pin=yes</code> and set the pin to whatever secret you want to be needed to decrypt the disk.</li>
+            <li>Reboot</li>
+        </ol>
+        <!-- <hr/>
+            <a class="link" href="https://news.ycombinator.com/item?id=45520217">View/Comment/Upvote on Hacker News</a> -->
+        <footer>
+            <hr/>
+            <small>
+                <a href="feed.atom"     >Atom Feed</a><br/>
+                <a href="/Blogroll.html">Blogroll </a><br/>
+                To contact Velocifyer, email velocifyer [at ]velocifyer.com.<br/>
+                Velocifyer's OpenPGP Certificate is <a href="/pgp-certificate.asc">1BA0 FC4B 80E0 F21B 0269 8CEE 634E BF87 40C7 48BE</a>.<br/>
+                Except for the favicon and javascript and the fonts, this is licensed CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣.<br/>
+                One of the fonts used on this website is Noto Sans, which uses <a href="/Assets/Fonts/Noto/Sans/LICENSE.txt">this license</a>.<br/>
+                This blog is available on <a href="https://codeberg.org/Velocifyer/Blog-ifyer">Codeberg</a>. Make an issue or merge request if it would be useful.<br/>
+                View warrant canaries <a href="https://files.velocifyer.com/Warant%20canaries/" referrerpolicy="no-referrer-when-downgrade">here</a>.
+                <noscript><br/>Congratulations, this website does not need JavaScript! Turn on JavaScript to get plausible analytics!</noscript>
+            </small>
+        </footer>
+    </body>
+</html>
