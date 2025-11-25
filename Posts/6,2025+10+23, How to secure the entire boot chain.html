@@ -90,7 +90,7 @@ fallback_options="-S autodetect"
         <h2>Set up TPM based decryption of the root partition.</h2>
         <ol start="0">
             <li>Run <code>sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=password --recovery-key</code> and save the recovery key securly.</li>
-            <li>Run <code>sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 --tpm2-with-pin=yes</code> and set the pin to whatever secret you want to be needed to decrypt the disk.</li>
+            <li>Run <code>sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 --tpm2-with-pin=yes</code> and set the pin to whatever secret you want to be needed to decrypt the disk. Remove <code>`--tpm2-with-pin=yes`</code> if you do not want a secret to have to be entered in-person (like on a server).</li>
             <li>Reboot</li>
         </ol>
         <!-- <hr/>
