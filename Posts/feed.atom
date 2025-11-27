@@ -190,12 +190,12 @@
         <summary>Computers should let the user do whatever they want easily. Anything else is a anti-feature.</summary>
     </entry>
     <entry>
-        <title>How to secure the entire boot chain</title>
+        <title>How to set up secure boot (with your own keys) and TPM based storage decryption on Arch Linux</title>
         <link href="https://blog.velocifyer.com/Posts/6,2025+10+23,%20How%20to%20secure%20the%20entire%20boot%20chain.html"/>
         <id>https://blog.velocifyer.com/Posts/6,2025+10+23,%20How%20to%20secure%20the%20entire%20boot%20chain.html</id>
         <!-- 1-based index unfortunately -->
         <!-- I don't want to fix that time -->
-        <updated>2025-11-24T12:29:00-04:00</updated>
+        <updated>2025-11-24T12:30:00-04:00</updated>
         <summary>How to set up secure boot on Arch Linux</summary>
     </entry>
 </feed>
