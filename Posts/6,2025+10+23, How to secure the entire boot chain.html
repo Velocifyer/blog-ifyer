@@ -69,7 +69,7 @@ fallback_options="-S autodetect"
         <li>
             Run <code>sudo mkinitcpio -P</code>.
         </li>
-        <li>Run <code>sudo efibootmgr --create --disk /dev/nvme0n1p1 --part 1 --label "Arch Linux" --loader '\EFI\Linux\arch-linux.efi' --unicode</code>.</li>
+        <li>Run <code>sudo efibootmgr --create --disk /dev/nvme0n1p1 --part 1 --label "Arch Linux" --loader '\EFI\Linux\arch-linux.efi' --unicode</code> changing the devices to the ones actually in use.</li>
         <li>
             Reboot.
         </li>
