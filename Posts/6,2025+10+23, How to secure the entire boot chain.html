@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width"/>
-        <title>How to set up secure boot (with your own keys) and TPM based storage decryption on Arch Linux | Blog-𝕚𝕗𝕪𝕖𝕣</title>
+        <title>How to set up secure boot (with your own keys) and lockdown mode and TPM based storage decryption on Arch Linux | Blog-𝕚𝕗𝕪𝕖𝕣</title>
         <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
         <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="preload" as="style"/>
         <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="stylesheet"/>
@@ -17,18 +17,19 @@
         <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
         <meta
             name="description"
-            content="How to secure the entire boot chain - blog-ifyer"
+            content="Make your system more tamper resistant - blog-ifyer"
         />
         <meta name="darkreader-lock"/>
     </head>
     <body style="width: 55em;">
         <a class="link" href="/"><h1>Blog-𝕚𝕗𝕪𝕖𝕣</h1></a>
-        <h2>How to set up secure boot (with your own keys) and TPM based storage decryption on Arch Linux</h2>
-        <h4>2025+10+20</h4>
+        <h2>How to set up secure boot (with your own keys) and lockdown mode and TPM based storage decryption on Arch Linux</h2>
+        <h4>2025+10+20, 2026+1+24</h4>
         <p>
             Normaly on arch linux there is no way to know wheater someone took out your ssd and modified the files on the ESP or the root partition.
             By encrypting the root partition you can prevent modifications to it but the ESP has to stay unencrypted.<br/>
             So we will use secure boot (with our own keys) and unified kernel images to prevent tampering with the kernel and initramfs and TPM to verify that secure boot was not disabled.<br/>
+            We will also use kernel lockdown mode in confidentiality mode to prevent loading unsigned kernel modules or reading kernel memory. <br/>
             After following this guide, you will not have to manualy sign files with secure boot.<br/>
             <small><STRONG>I AM NOT RESPONSIBLE FOR YOU BREAKING STUFF BY FOLLOWING THIS GUIDE!!</STRONG></small>
         </p>
@@ -40,7 +41,7 @@
         <ol start="0">
             <li>Install `<code>tpm2-tss</code>` with pacman.</li>
             <li>Set the contents of /etc/kernel/cmdline to:
-                <code>rd.luks.name=uuid=root root=/dev/mapper/root rw zswap.enabled=0 rd.luks.options=tpm2-device=auto,tpm2-measure-pcr=yes</code> replacing uuid with the UUID of the LUKS2 root partition.</li>
+                <code>rd.luks.name=uuid=root root=/dev/mapper/root rw zswap.enabled=0 rd.luks.options=tpm2-device=auto,tpm2-measure-pcr=yes</code> replacing uuid with the UUID of the LUKS2 root partition. (This file will define the kernel command line.)</li>
             <li>Set /etc/mkinitcpio.d/linux.preset to <code><pre># mkinitcpio preset file for the 'linux' package
             
 #ALL_config="/etc/mkinitcpio.conf"
@@ -75,7 +76,8 @@ fallback_options="-S autodetect"
         <h2>Set up UEFI for secure boot.</h2>
         The exact steps for this depend on your hardware.<br/>
         Enter your UEFI firmware. If it has a option to delete specific keys then delete the Platform key and all microsoft keys. You may also delete the device manufactuer's keys but I do not recommend it because it may make firmware updates harder. If your UEFI does not let you delete specific keys than just delete all of them.<br/>
-        Then set a “Administrator Password” in your UEFI firmware configurator and store the password somewhere safe. You may have to enable secure boot in this step.
+        Then set a “Administrator Password” in your UEFI firmware configurator and store the password somewhere safe. You may have to enable secure boot in this step.<br/>
+        I also reccomend using some sort of tamper evidence to detect if someone opened the device to disable secure boot to get the password. (I use glitter nail polish and stickers over the screws and the blink comparison android app.)
         <h2>Set up secure boot with sbctl</h2>
         <ol start="0">
             <li>Install the sbctl pacman package</li>
@@ -91,6 +93,19 @@ fallback_options="-S autodetect"
             <li>Run <code>sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=7+15:sha256=0000000000000000000000000000000000000000000000000000000000000000 --tpm2-with-pin=yes</code> and set the pin to whatever secret you want to be needed to decrypt the disk. Remove <code>`--tpm2-with-pin=yes`</code> if you do not want a secret to have to be entered in-person (like on a server).</li>
             <li>Reboot</li>
         </ol>
+        <h2>Set up lockdown mode.</h2>
+        <ol start="0">
+            <li>Make sure you do not use any unsigned kernel modules.</li>
+            <li>Add <code>lockdown=confidentiality</code> to <code>/etc/kernel/cmdline</code>.</li>
+            <li>Run <code>sudo mkinitcpio -P</code>.</li>
+            <li>Restart the system</li>
+        </ol>
+        <p>
+            This setup does have some slight vulnerabilities.<br/>
+            For example this only secures against a attacker with root accses until a reboot becuase the secure boot keys are stored on the device.<br/>
+            However this setup does stop a attacker who just has accses to the SSD and not the decryption key from making it run malware.<br/>
+            I recommend entering a random ammount of incorrect decryption passwords incase the attacker has disabled secure boot and is trying to get your password.
+        </p>
         <!-- <hr/>
             <a class="link" href="https://news.ycombinator.com/item?id=45520217">View/Comment/Upvote on Hacker News</a> -->
         <footer>
