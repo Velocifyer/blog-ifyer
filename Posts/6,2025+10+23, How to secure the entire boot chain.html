@@ -39,7 +39,7 @@
         
             <h2>Set up unified kernel images.</h2>
         <ol start="0">
-            <li>Install `<code>tpm2-tss</code>` with pacman.</li>
+            <li>Install <code>tpm2-tss</code> with pacman.</li>
             <li>Set the contents of /etc/kernel/cmdline to:
                 <code>rd.luks.name=uuid=root root=/dev/mapper/root rw zswap.enabled=0 rd.luks.options=tpm2-device=auto,tpm2-measure-pcr=yes</code> replacing uuid with the UUID of the LUKS2 root partition. (This file will define the kernel command line.)</li>
             <li>Set /etc/mkinitcpio.d/linux.preset to <code><pre># mkinitcpio preset file for the 'linux' package
@@ -81,7 +81,7 @@ fallback_options="-S autodetect"
         <h2>Set up secure boot with sbctl</h2>
         <ol start="0">
             <li>Install the sbctl pacman package</li>
-            <li>Run `sudo sbctl create-keys`.</li>
+            <li>Run <code>sudo sbctl create-keys</code>.</li>
             <li>Run <code>sudo mkinitcpio -P</code>.</li>
             <li>Run <code>sudo sbctl enroll-keys -f --yes-this-might-brick-my-machine</code></li>
             <li>Enable enforcement of secure boot in UEFI</li>
