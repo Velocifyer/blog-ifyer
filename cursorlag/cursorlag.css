@@ -1,0 +1,19 @@
+/*this is dual licensed CC-BY-SA and GPL2.0 or later by velocifyer with the exception that velocifyer gets to use this under the CC-0 license*/
+.cursorghost {
+    animation: fadeOut 0.3s ease-in;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    background-color: transparent;
+    background-image: url(cursor.svg);
+    height: 32px;
+    width: 32px;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+html {
+    cursor: url(cursor.svg),pointer;
+}
