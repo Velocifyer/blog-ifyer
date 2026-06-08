@@ -1,0 +1,74 @@
+---
+title: How to self-host a web font from Google Fonts
+dates: "2025-8-13 (September 14th, 2025), 2025-8-14 (September 15th 2025), Saturday 2026+2+27"
+tags: post
+layout: post
+description: "Here's how to self-host a web font from Google Fonts"
+width: 61em
+---
+        <!-- TODO: fix line spacing -->
+        A common place to get a web font is <a href="https://fonts.google.com/" referrerpolicy="no-referrer">Google Fonts</a><br/>
+        If you want to use a font from Google Fonts, you should not just paste the code they give you so you don't leak visitor IP adresses to google.<br/>
+        Instead, you should download the font files and put them on your webserver.<br/>
+        The Download button in Google Fonts gives TTF files and not WOFF2 files<br/>
+        <!--If you want a font used on this website(like Noto Sans(the best font) and Fira Code), follow the instructions in the README from <a href="https://codeberg.org/Velocifyer/Blog-ifyer/src/branch/main/Assets/Fonts/" referrerpolicy="no-referrer-when-downgrade" ping="https://blog.velocifyer.com/clicked+link+to+codeberg+fonts">
+        here
+    </a> and skip steps 0 and 1.<br/> -->
+    <strong>THIS IS NOT LEGAL ADVICE</strong><br/>
+    <strong>I AM NOT YOUR LAWYER</strong>
+    <ol start="-1">
+        <li><strong>ENSURE THAT YOUR USE OF THE FONT WILL COMPLY WITH THE LICENSE</strong></li>
+        <li>
+            Download the font
+            <ol start="0">
+                <li>
+                    Go to <a href="https://fonts.google.com/" referrerpolicy="no-referrer">Google Fonts</a> and search for the font you want.
+                </li>
+                <li>
+                    Select "Get font".
+                </li>
+                <li>
+                    Select "Get embed code" (don't paste the code it gives you).
+                </li>
+                <li>
+                    Select which options you want included.
+                </li>
+                <li>
+                    In the HTML code it gives you, it should have something like <code>&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Fira+Code&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code>.<br/>
+                    Download the file using the URL after the href in that element (<code>https://fonts.googleapis.com/css2?family=Fira+Code&display=swap</code> in this case).
+                    Download each font referenced in the CSS file you just downloaded.<br/>
+                    Put all of the font you just downloaded in a folder, ideally with a something that will change each update and a long cache time (like /Assets/Fira/Code/2025-8-13/).<br/>
+                    Copy the CSS file into that folder.
+                    Change the CSS to use relative links.<br/> (eg change <code>src: url(https://fonts.gstatic.com/s/firacode/v26/uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sJVD7Ng.woff2) format('woff2');</code> into <code>src: url(uU9eCBsR6Z2vfE9aq3bL0fxyUs4tcw4W_D1sJVD7Ng.woff2) format('woff2');</code>)
+                </li>
+            </ol>
+        </li>
+        <li>
+            Paste the license of the font into a file. To find the license of a google font do:
+            <ol start="0">
+                <li>Search for the font on <a href="https://fonts.google.com/" referrerpolicy="no-referrer">Google Fonts</a></li>
+                <li>Select the font</li>
+                <li>Select "License"</li>
+            </ol>
+        </li>
+        <li>
+            Add html to use the CSS like:
+            <pre><code>&lt;link href=&quot;/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css&quot; rel=&quot;preload&quot;/&gt;
+    &lt;link href=&quot;/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css&quot; rel=&quot;stylesheet&quot;/&gt;</code></pre>
+        </li>
+        <li>
+            Add css to use the font like:
+    <pre><code>code {
+    font-family: "Fira Code", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    }</code></pre>
+        </li>
+        <li>
+            Add a link to the font LICENSE and <strong>ensure that your usage of the font follows the license of the font</strong>.
+        </li>
+    </ol>
+    If you can't understand these steps, <a href="https://codeberg.org/Velocifyer/Blog-ifyer/src/branch/main/Assets/Fonts/Noto/Sans" referrerpolicy="no-referrer-when-downgrade" ping="https://blog.velocifyer.com/clicked+other+link+to+codeberg+fonts">
+        see how it was done here.
+    </a>

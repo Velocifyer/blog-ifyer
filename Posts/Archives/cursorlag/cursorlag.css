@@ -1,0 +1,21 @@
+/* this is tripple licensed CC-BY-SA and GPL2.0 or later and Apache 2.0 by velocifyer with the exception that velocifyer gets to use this under the CC-0 license*/
+/* If you make modifications to this file, remember to update the copyright notice! */
+
+.cursorghost {
+    animation: fadeOut 1.5s ease-in;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    background-color: transparent;
+    background-image: url(/cursorlag/cursor.svg); /*Adjust this to link to your cursor */
+    height: 32px;
+    width: 32px;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+html {
+    cursor: url(/cursorlag/cursor.svg) 4 4, pointer; /* adjust this to be your cursor and your cursors hotspot */
+}

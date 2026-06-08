@@ -1,53 +1,41 @@
+---
+width: 600px
+---
 <!doctype html>
 <html lang="en-US">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width"/>
-        <title>0-Based indexes are the best | Blog-𝕚𝕗𝕪𝕖𝕣</title>
+        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
         <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="preload" as="style"/>
         <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="stylesheet"/>
-        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
         <link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
         <link href="/" rel="prefetch"/>
         <link href="https://files.velocifyer.com/Warant%20canaries/" rel="dns-prefetch"/>
         <link rel="alternate" type="application/atom+xml" href="feed.atom"/>
+        <!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
+        <!-- <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="preload" as="style"/>  -->
+        <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="stylesheet"/>
         <link rel="me" href="https://mastodon.social/@Velocifyer"/>
         <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
-        <meta
-            name="description"
-            content="Here's why you should use 0-based indexes - blog-ifyer"
-        />
-        <meta name="darkreader-lock"/>
+
         <!-- cursorlag -->
         <link href="/cursorlag/cursorlag.css" rel="stylesheet"/>
         <script src="/cursorlag/cursorlag.js" defer></script>
+
+        <title>{{title}} | Blog-𝕚𝕗𝕪𝕖𝕣</title>
+        <meta
+            name="description"
+            content="{{description}} - Blog-ifyer"
+        />
     </head>
-    <body style="width: 53em;">
-        <a href="/"><h1>Blog-𝕚𝕗𝕪𝕖𝕣</h1></a>
-        <h2>0-based indexes are the best</h2>
-        <h3>2025-8-10 (September 11th, 2025)</h3>
-        <h4>TLDR: use 0-based indexes now and in the future (and in the past if you can)</h4>
-        <p>
-            <!-- TODO: fix line spacing -->
-            I get so annoyed when indexes aren't 0-based. <br/>
-            Indexes should be 0-based. A 1-based index confuses me (and many other people) because i'm used to 0-based indexes, and so are many people.<br/>
-            That's why i write 11th september 2025 as "2025-8-10"
-        </p>
-        <p>Here is what a 0 based index looks like:</p>
-            <ol start="0">
-                <li>Blog-ifyer</li>
-                <li>Pasta</li>
-                <li>Hot dogs</li>
-            </ol>
-        Here is what a 1 based index looks like:
-            <ol start="1">
-                <li>Blog-ifyer</li>
-                <li>Pasta</li>
-                <li>Hot dogs</li>
-            </ol>
-            At least dont use 0.5 based indexes.
-        <hr/>
-        <a href="https://news.ycombinator.com/item?id=45221920">First Hacker News post (The people there incorrectly think i'm trolling)</a>
+    <body style="width: {{width}};">
+        <a class="link" href="/"><h1>Blog-𝕚𝕗𝕪𝕖𝕣</h1></a>
+        <h2>{{title}}</h2>
+        <h4>{{dates}}</h4>
+        <main>
+            {{content}}
+        </main>
         <footer>
             <hr/>
             <small>

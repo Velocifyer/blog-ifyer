@@ -3,46 +3,53 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width"/>
-        <title>"Jailbreaking" computers and sideloading shouldn't exist | Blog-𝕚𝕗𝕪𝕖𝕣</title>
-        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
+        <title>0-Based indexes are the best | Blog-𝕚𝕗𝕪𝕖𝕣</title>
         <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="preload" as="style"/>
         <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="stylesheet"/>
+        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
         <link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
         <link href="/" rel="prefetch"/>
         <link href="https://files.velocifyer.com/Warant%20canaries/" rel="dns-prefetch"/>
         <link rel="alternate" type="application/atom+xml" href="feed.atom"/>
-        <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="preload" as="style"/>
-        <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="stylesheet"/>
         <link rel="me" href="https://mastodon.social/@Velocifyer"/>
         <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
         <meta
             name="description"
-            content="Computers should let the user do whatever they want easily. Anything else is a anti-feature. - blog-ifyer"
+            content="Here's why you should use 0-based indexes - blog-ifyer"
         />
         <meta name="darkreader-lock"/>
         <!-- cursorlag -->
-        <link href="/cursorlag/cursorlag.css" rel="stylesheet"/>
-        <script src="/cursorlag/cursorlag.js" defer></script>
+        <link href="cursorlag/cursorlag.css" rel="stylesheet"/>
+        <script src="cursorlag/cursorlag.js" defer></script>
     </head>
-    <body style="width: 55em;">
-        <a class="link" href="/"><h1>Blog-𝕚𝕗𝕪𝕖𝕣</h1></a>
-        <h2>Jailbreaking computers shouldn't exist</h2>
-        <h3>2025+9+7</h3>
-        <small>Every instance of jailbreaking on this post is for computers.</small><br/>
-        Computers should let the user do whatever they want easily. Anything else is a anti-feature. <br/>
-        There should not be jailbreaking because it means that the computer requires a modification to let the user do whatever they want.<br/>
-        There should also not be "sideloading" because it makes it sound like it is a bad thing or being sneaky.<br/>
-        I suggest the term "installing" and "Fixing a anti-feature"<br/>
-        I think that a computer should let the user do whatever they want without complicated jailbreaks.<br/>
-        
-        <p>
-            Some people think that it reduces security. However it does not reduce security if it has to be enabled. 
-            The option to enable it shouldn't have a misleading name like "Enable software that will destroy your computer" or be something that Apple will come up with.
-        </p>
-        
-        <hr/>
-        <a class="link" href="https://news.ycombinator.com/item?id=45520217">First Hacker News post</a>
-        <footer>
+    <body style="width: 53em;">
+        <a href="/"><h1>Blog-𝕚𝕗𝕪𝕖𝕣</h1></a>
+            <h2>This blog post is <a href="index.html">archived</a>.</h2>
+            <h2>0-based indexes are the best</h2>
+            <h3>2025-8-10 (September 11th, 2025)</h3>
+            <h4>TLDR: use 0-based indexes now and in the future (and in the past if you can)</h4>
+            <p>
+                <!-- TODO: fix line spacing -->
+                I get so annoyed when indexes aren't 0-based. <br/>
+                Indexes should be 0-based. A 1-based index confuses me (and many other people) because i'm used to 0-based indexes, and so are many people.<br/>
+                That's why i write 11th september 2025 as "2025-8-10"
+            </p>
+            <p>Here is what a 0 based index looks like:</p>
+                <ol start="0">
+                    <li>Blog-ifyer</li>
+                    <li>Pasta</li>
+                    <li>Hot dogs</li>
+                </ol>
+            Here is what a 1 based index looks like:
+                <ol start="1">
+                    <li>Blog-ifyer</li>
+                    <li>Pasta</li>
+                    <li>Hot dogs</li>
+                </ol>
+                At least dont use 0.5 based indexes.
+            <hr/>
+            <a href="https://news.ycombinator.com/item?id=45221920">First Hacker News post (The people there incorrectly think i'm trolling)</a>
+            <footer>
             <hr/>
             <small>
                 <a href="feed.atom"     >Atom Feed</a><br/>
@@ -51,7 +58,6 @@
                 Velocifyer's OpenPGP Certificate is <a href="/pgp-certificate.asc">1BA0 FC4B 80E0 F21B 0269 8CEE 634E BF87 40C7 48BE</a>.<br/>
                 Except for the favicon and javascript and the fonts, this is licensed CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣.<br/>
                 One of the fonts used on this website is Noto Sans, which uses <a href="/Assets/Fonts/Noto/Sans/LICENSE.txt">this license</a>.<br/>
-                One of the fonts used on this website is Fira Code, which uses <a href="/Assets/Fonts/Fira/Code/2025-8-13/LICENSE.TXT">This license</a>.<br/>
                 The cursor used in this website is from the breeze theme. See <a href="https://github.com/KDE/breeze/tree/master/cursors/Breeze">this</a> for license details and commit history.<br/>
                 This website is available on <a href="https://codeberg.org/Velocifyer/Blog-ifyer">Codeberg</a>. Make an issue or merge request if it would be useful.<br/>
                 <noscript><br/>Congratulations, this website does not need JavaScript! Turn on JavaScript to get a cool cursor effect!</noscript>
