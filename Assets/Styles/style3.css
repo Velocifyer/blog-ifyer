@@ -22,13 +22,14 @@ h1 {
 }
 
 p{
-    line-height: 1.25;
+    /* line-height: 1.25; */
+    margin: 1em;
 }
 li {
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     font-size: 16px;
-    line-height: 2;
-    margin: 0;
+    /* line-height: 2; */
+    margin: 0.1em;
     padding: 0;
 }
 img {
@@ -43,6 +44,7 @@ code {
     font-weight: 400;
     font-style: normal;
     background-color: #1e242a;
+    white-space: nowrap;
 }
 a {
     color: #0ba1ff;
