@@ -1,0 +1,23 @@
+name: Publish
+on:
+  push:
+    branches: [main]
+jobs:
+  publish:
+    runs-on: codeberg-tiny
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+      - run: npx @11ty/eleventy
+
+      - uses: https://codeberg.org/git-pages/action@v2
+        with:
+          site: https://blog.velocifyer.com/
+          server: codeberg.page
+          token: ${{ forgejo.token }}
+          source: _site/
