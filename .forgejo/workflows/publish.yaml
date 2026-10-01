@@ -17,7 +17,7 @@ jobs:
 
       - uses: https://codeberg.org/git-pages/action@v2
         with:
-          site: https://blog.velocifyer.com/
+          site: http://blog.velocifyer.com/
           server: codeberg.page
           token: ${{ forgejo.token }}
           source: _site/
