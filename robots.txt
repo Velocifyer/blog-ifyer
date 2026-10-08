@@ -2,5 +2,7 @@ User-Agent: *
 Allow: /
 Disallow: /404.html
 Disallow: /Posts/Archives/
+Disallow: /Assets
+Disallow: /node_modules
 
 Sitemap: https://blog.velocifyer.com/sitemap.xml
