@@ -1,17 +1,50 @@
+/* Fix H1 in articles on older browsers */
+h1 {
+	margin-block: 0.67em;
+	font-size: 2em;
+}
+
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #dad8d8;
+
+	--text-color-link: #0ba1ff;
+	--text-color-link-active: #6969f7;
+	--text-color-link-visited: #569ace;
+	--text-color: var(--color-gray-90);
+	--background-color: #15202b;
+
+	--syntax-tab-size: 4;
+}
+
+html,
+body {
+	padding: 1px;
+	margin: 1%;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
 html {
-    background-color: #181a1b;
+	overflow-y: scroll;
 }
 body {
-    background-color: #00000000;
-    color: #ffffff;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Google Sans Flex Variable", "Google Sans Flex", "Noto Sans", "DejaVu Sans", sans-serif;
     font-weight: 400;
-    width: 600px;
+    width: 100%;
+    max-width: 40em;
     margin: 0 auto;
     padding: 0 20px 20px 20px;
     border: 5px solid black;
 }
-h1 {
+
+/* The big title at the top of the page */
+div.bigtitle#bigtitle {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    margin-block: 0.67em;
     font-size: 60px;
     text-align: center;
     margin: 0;
@@ -23,7 +56,7 @@ h1 {
 
 p{
     /* line-height: 1.25; */
-    margin: 1em;
+    margin: 1em 0;
 }
 li {
     /* letter-spacing: 1px; */
@@ -31,6 +64,10 @@ li {
     /* line-height: 2; */
     margin: 0.1em;
     padding: 0;
+}
+
+ul.links li {
+	padding: 1px
 }
 img {
     display: block;
@@ -43,9 +80,107 @@ code {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    background-color: #1e242a;
-    white-space: nowrap;
+    background-color: #272822;
+    word-break: break-all;
 }
-a {
-    color: #0ba1ff;
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img{
+ 	 max-width: 100%;
+}
+img[width][height] {
+	height: auto;
+}
+img[src$=".svg"] {
+	width: 100%;
+	height: auto;
+	max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+footer {
+  	border-top: 1px solid var(--color-gray-90);
+	margin: 1%;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Header */
+header {
+	display: flex;
+	/* gap: 1em; */
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+	border-bottom: 1px dashed var(--color-gray-20);
+	margin: 1em
+
+}
+#home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+#home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: .5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+
+vb-dates {
+	display: block;
+	font-size: 1em;
+	font-weight: bold;
+	margin-block: 1.33em;
+}
+
+/* Fix heading anchors */
+heading-anchors:not(:defined) :is(h2,h3,h4,h5,h6):after {
+	content: "#";
+	padding: 0 .25em;
+	opacity: 0;
 }

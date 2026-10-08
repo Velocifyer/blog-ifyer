@@ -1,15 +1,79 @@
-module.exports = function(eleventyConfig) {
-  eleventyConfig.setDynamicPermalinks(false); 
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const { IdAttributePlugin } = require("@11ty/eleventy");
+const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
+const { HtmlBasePlugin } = require("@11ty/eleventy");
+const MarkdownItGitHubAlertsModule = require("markdown-it-github-alerts");
+const MarkdownItGitHubAlerts = MarkdownItGitHubAlertsModule.default ?? MarkdownItGitHubAlertsModule;
 
-  eleventyConfig.addPassthroughCopy("Assets/");
-   eleventyConfig.addPassthroughCopy("cursorlag/");
-  eleventyConfig.addPassthroughCopy("Posts/Archives/cursorlag/");
+
+const metadata = {
+  language: "en",
+  title: "Blog-Ifyer",
+  subtitle: "Velocifyer's Blog.",
+  base: "https://blog.velocifyer.com",
+  author: { name: "Velocifyer" },
+};
+const collection = { name: "posts", limit: 20 };
+
+
+module.exports = async function(eleventyConfig) {
+
+
+	eleventyConfig.addPlugin(HtmlBasePlugin);
+
+  	eleventyConfig.setDynamicPermalinks(false); 
+
+  	eleventyConfig.addPassthroughCopy("Assets/");
+   	eleventyConfig.addPassthroughCopy("cursorlag/");
+  	eleventyConfig.addPassthroughCopy("Posts/Archives/cursorlag/");
     eleventyConfig.addPassthroughCopy("Posts/Archives/");
-    eleventyConfig.addPassthroughCopy("404.html");
     eleventyConfig.addPassthroughCopy("_redirects");
-    eleventyConfig.addPassthroughCopy(".domains");
     eleventyConfig.addPassthroughCopy("LICENSE");
-  return {
+    eleventyConfig.addFilter("dateTimes", function (dates) {
+        return dates.map(date => {
+            return `<time datetime="${date}">${date}</time>`;
+        }).join(", ");
+    });
+	eleventyConfig.addPassthroughCopy("node_modules/@fontsource-variable/google-sans-flex/**");
+	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
+		preAttributes: { tabindex: 0 }   // makes scrollable code blocks keyboard-accessible
+	});
+	eleventyConfig.addWatchTarget("**/*.css");
+	eleventyConfig.addPassthroughCopy("node_modules/prismjs/themes/*.css");
+	eleventyConfig.addPassthroughCopy("node_modules/@zachleat/heading-anchors/*");
+	eleventyConfig.addPassthroughCopy("robots.txt");
 
-  };
+	eleventyConfig.addPlugin(feedPlugin, {
+		type: "atom",
+		outputPath: "/Posts/feed.atom",   // <-- put your OLD Atom URL here
+		collection,
+		metadata,
+	});
+
+	eleventyConfig.addPlugin(feedPlugin, {
+		type: "rss",
+		outputPath: "/Posts/rss.xml",
+		collection,
+		metadata,
+	});
+
+	eleventyConfig.addPlugin(feedPlugin, {
+		type: "json",
+		outputPath: "/Posts/feed.json",
+		collection,
+		metadata,
+	});
+
+eleventyConfig.amendLibrary("md", (mdLib) => {
+    mdLib.use(MarkdownItGitHubAlerts);
+    console.log("[alerts]", mdLib.render("> [!NOTE]\n> hi\n"));
+});
+	eleventyConfig.addPlugin(IdAttributePlugin, {
+		// slugify: eleventyConfig.getFilter("slugify"), // default
+		// selector: "h1,h2,h3,h4,h5,h6",                // default
+	});
+
+	return {
+
+	};
 };

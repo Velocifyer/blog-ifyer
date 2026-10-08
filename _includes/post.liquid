@@ -1,64 +1,102 @@
 ---
 width: 600px
+uses-h3: false
+has-date: false
+subtitle: {{dates}}
 ---
 <!doctype html>
 <html lang="en-US">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width"/>
-        <style> /* Stop FOUC */
-        html {
-    		background-color: #181a1b;
-		}
-		</style>
-        <link href="/Assets/Styles/josh-css-reset.css" rel="stylesheet"/>
-        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
-        <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="preload" as="style"/>
-        <link href="/Assets/Fonts/Noto/Sans/normal.css" rel="stylesheet"/>
-        <link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
-        <link href="/" rel="prefetch"/>
-        <link href="https://files.velocifyer.com/Warant%20canaries/" rel="dns-prefetch"/>
-        <link rel="alternate" type="application/atom+xml" href="feed.atom"/>
-        <!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
-        <!-- <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="preload" as="style"/>  -->
-        <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="stylesheet"/>
-        <link rel="me" href="https://mastodon.social/@Velocifyer"/>
-        <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
-
-        <!-- cursorlag -->
-        <link href="/cursorlag/cursorlag.css" rel="stylesheet"/>
-        <script src="/cursorlag/cursorlag.js" defer></script>
-
-        <title>{{title}} | Blog-𝕚𝕗𝕪𝕖𝕣</title>
+		        <title>{{title}} | Blog-𝕚𝕗𝕪𝕖𝕣</title>
         <meta
             name="description"
             content="{{description}} - Blog-ifyer"
         />
+
+        <style> /* Stop FOUC */
+        html {
+    		background-color: #15202b;
+		}
+		</style>
+        <link href="/Assets/Styles/josh-css-reset.css" rel="stylesheet"/>
+        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
+        <link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
+        <link href="/" rel="prefetch"/> 
+        <link rel="alternate" type="application/atom+xml" href="feed.atom"/>
+        <!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
+        <!-- <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="preload" as="style"/>  -->
+        <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="/node_modules/@fontsource-variable/google-sans-flex/wght.css">
+
+		<link rel="stylesheet" href="/node_modules/prismjs/themes/prism-okaidia.min.css">
+
+		<link rel="stylesheet" href="/Assets/Styles/notes.css">
+
+        <meta name="author" content="𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣"/>
+
+        <link rel="me" href="https://mastodon.social/@Velocifyer"/>
+        <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
+
+		<meta name="generator" content="{{ eleventy.generator }}">
+		
+		<!-- Feeds -->
+		 <link rel="alternate" type="application/atom+xml" title="Atom" href="/Posts/feed.atom">
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="/Posts/Feeds/rss.xml">
+		<link rel="alternate" type="application/feed+json" title="JSON Feed" href="/Posts/Feeds/feed.json">
+
+        <!-- cursorlag -->
+        <link  href="/cursorlag/cursorlag.css" rel="stylesheet"/>
+        <script src="/cursorlag/cursorlag.js" defer></script>
     </head>
-    <body style="width: {{width}};">
-        <a class="link" href="/"><h1>Blog-𝕚𝕗𝕪𝕖𝕣</h1></a>
-        <h2>{{title}}</h2>
-        <h4>{{dates}}</h4>
+    <body>
+		<header>
+			<a href="/" id="home-link">Blog-𝕚𝕗𝕪𝕖𝕣</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/" aria-current="page">Home</a></li>
+					<li class="nav-item"><a href="/Blogroll.html">Blogroll</a></li>
+				</ul>
+			</nav>
+		</header>
+		<!--[if IE]>
+  			<p>Please update your browser. We recommend Firefox 156 or something using webkit. Chromium is also ok.</p>
+		<![endif]-->
         <main>
-            {{content}}
+			<heading-anchors>
+					<h1>{{title}}</h1>
+				{% if has-dates %}
+					<vb-dates>
+						{% for date in dates %} 	
+							<time datetime="{{ date }}">{{ date }}</time>{% unless forloop.last %}, {% endunless %}
+						{% endfor %}
+					</vb-dates>
+				{% endif %}
+				{{content}}
+			</heading-anchors>
         </main>
+
+		<!-- Heading Anchors -->
+		<script type="module" src="/node_modules/@zachleat/heading-anchors/heading-anchors.js" async></script>
+
         <footer>
-            <hr/>
             <small>
                 <a href="feed.atom"     >Atom Feed</a><br/>
                 <a href="/Blogroll.html">Blogroll </a><br/>
-                To contact Velocifyer, email velocifyer [at ]velocifyer.com.<br/>
+                To contact Velocifyer, email veolcifyer [at​] velocifyer[.]com, but fixing the type based on the domain (to stop bots).<br/>
                 Velocifyer's OpenPGP Certificate is <a href="/pgp-certificate.asc">1BA0 FC4B 80E0 F21B 0269 8CEE 634E BF87 40C7 48BE</a>.<br/>
-                Except for the favicon and javascript and the fonts, this is licensed CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣.<br/>
-                One of the fonts used on this website is Noto Sans, which uses <a href="/Assets/Fonts/Noto/Sans/LICENSE.txt">this license</a>.<br/>
+                Except for the favicon and javascript and the fonts, this is licensed <nobr id="footer-license">CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣</nobr>.<br/>
+                One of the fonts used on this website is Google Sans Flex, which uses <a href="/node_modules/@fontsource-variable/google-sans-flex/LICENSE">this license</a>.<br/>
                 One of the fonts used on this website is Fira Code, which uses <a href="/Assets/Fonts/Fira/Code/2025-8-13/LICENSE.TXT">This license</a>.<br/>
                 The cursor used in this website is from the breeze theme. See <a href="https://github.com/KDE/breeze/tree/master/cursors/Breeze">this</a> for license details and commit history.<br/>
                 This website is available on <a href="https://codeberg.org/Velocifyer/Blog-ifyer">Codeberg</a>. Make an issue or merge request if it would be useful.<br/>
+				Please disable your ad or tracker blocker to allow our private analytics to run.<br/>
 				This website uses <a href="https://www.simpleanalytics.com/">Simple Analytics</a>. This means that we collect "anonymous usage data", including page views and browser versions.<br/>
                 <noscript><br/>Congratulations, this website does not need JavaScript! Turn on JavaScript to get a cool cursor effect!</noscript>
             </small>
         </footer>
-
 		<!-- Simple analytics -->
 		<script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 		<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>

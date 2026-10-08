@@ -1,0 +1,17 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+site:
+  url: https://blog.velocifyer.com/
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for page in collections.all %}
+  {%- if not page.data.excludeFromSitemap and page.url %}
+  <url>
+    <loc>{{ page.url | absoluteUrl(site.url) }}</loc>
+    <lastmod>{{ page.date | dateToRfc3339 }}</lastmod>
+  </url>
+  {%- endif %}
+{%- endfor %}
+</urlset>
