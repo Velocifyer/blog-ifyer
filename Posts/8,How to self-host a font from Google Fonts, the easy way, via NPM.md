@@ -47,7 +47,7 @@ For this blog, we do:
 <link rel="stylesheet" href="/node_modules/@fontsource-variable/google-sans-flex/wght.css">
 ```
 
-3. Ensure that your use of the font is license compliant. (the license is in `./node_modules/PACKAGE_NAME/LICENSE`; you may have to link to it)
+3. Ensure that your use of the font is license compliant. (the license is often in `./node_modules/PACKAGE_NAME/LICENSE`; you may have to link to it) **THIS IS NOT LEGAL ADVICE**
 4. Find the name used for the font-family from from the font-family rule in the CSS you are importing.
 5. Using [the font-family CSS rule](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/font-family), use the font.
 

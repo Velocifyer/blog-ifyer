@@ -184,3 +184,15 @@ heading-anchors:not(:defined) :is(h2,h3,h4,h5,h6):after {
 	padding: 0 .25em;
 	opacity: 0;
 }
+
+/* The badges */
+vb-badges  img {
+	display: inline;
+	height: 50px;
+	width: 210px;
+	object-fit: cover;
+}
+
+img.crisp-edges {
+	image-rendering: crisp-edges;
+}

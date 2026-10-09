@@ -15,16 +15,12 @@ subtitle: {{dates}}
             content="{{description}} - Blog-ifyer"
         />
 
-        <style> /* Stop FOUC */
-        html {
-    		background-color: #15202b;
-		}
+        <style type="text/css"> /* Inline stylesheet */
+			{%  include "Assets/Styles/josh-css-reset.css" %}
 		</style>
-        <link href="/Assets/Styles/josh-css-reset.css" rel="stylesheet"/>
-        <link href="/Assets/Styles/style3.css" rel="stylesheet"/>
-        <link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
-        <link href="/" rel="prefetch"/> 
-        <link rel="alternate" type="application/atom+xml" href="feed.atom"/>
+		<style type="text/css">
+			{% include "Assets/Styles/style3.css" %}
+		</style>
         <!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
         <!-- <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="preload" as="style"/>  -->
         <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="stylesheet"/>
@@ -34,15 +30,8 @@ subtitle: {{dates}}
 
 		<link rel="stylesheet" href="/Assets/Styles/notes.css">
 
-        <meta name="author" content="𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣"/>
-
-        <link rel="me" href="https://mastodon.social/@Velocifyer"/>
-        <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
-
-		<meta name="generator" content="{{ eleventy.generator }}">
-		
 		<!-- Feeds -->
-		 <link rel="alternate" type="application/atom+xml" title="Atom" href="/Posts/feed.atom">
+		<link rel="alternate" type="application/atom+xml" title="Atom" href="/Posts/feed.atom">
 		<link rel="alternate" type="application/rss+xml" title="RSS" href="/Posts/Feeds/rss.xml">
 		<link rel="alternate" type="application/feed+json" title="JSON Feed" href="/Posts/Feeds/feed.json">
 
@@ -51,7 +40,19 @@ subtitle: {{dates}}
         <script src="/cursorlag/cursorlag.js" defer></script>
 
 		<!-- Better referer policy -->
-		 <meta name="referrer" content="unsafe-url">
+		<meta name="referrer" content="unsafe-url">
+
+        <meta name="author" content="𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣"/>
+
+        <link rel="me" href="https://mastodon.social/@Velocifyer"/>
+        <meta name="fediverse:creator" content="@Velocifyer@mastodon.social"/>
+
+		<meta name="generator" content="{{ eleventy.generator }}">
+		<link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
+		
+        <link href="/" rel="prefetch"/> 
+
+		<script defer src="https://umami.velocifyer.com/script.js" data-website-id="8b458155-4bff-4cad-9e6e-66a5d5bbb87b"></script>
     </head>
     <body>
 		<header>
@@ -97,7 +98,17 @@ subtitle: {{dates}}
                 This website is available on <a href="https://codeberg.org/Velocifyer/Blog-ifyer">Codeberg</a>. Make an issue or merge request if it would be useful.<br/>
 				Please disable your ad or tracker blocker to allow our private analytics to run.<br/>
 				This website uses <a href="https://www.simpleanalytics.com/">Simple Analytics</a>. This means that we collect "anonymous usage data", including page views and browser versions.<br/>
+				This website uses a self hosted version of Umami Analytics. This means that we collect "anonymous usage data", including page views and browser versions.<br/>
                 <noscript><br/>Congratulations, this website does not need JavaScript! Turn on JavaScript to get a cool cursor effect!</noscript>
+
+				<vb-badges>
+					<a href="https://dashboard.simpleanalytics.com/?utm_source=blog.velocifyer.com&utm_content=badge&affiliate=dubev" referrerpolicy="origin" target="_blank" fetchpriority="low">
+						<img src="https://simpleanalyticsbadges.com/blog.velocifyer.com?mode=dark?counter=true" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" height="50" width="210" role="img" alt="This Website uses Simple Analytics" type="image/svg+xml"/>
+					</a>
+					<a href="https://firefox.com">
+						<img src="/Assets/Images/Badges/tested on Firefox.gif" loading="lazy" type="image/gif" alt="This website is tested on Firefox."/>
+					</a>
+				</vb-badges>
             </small>
         </footer>
 		<!-- Simple analytics -->
