@@ -14,7 +14,7 @@ const metadata = {
   base: "https://blog.velocifyer.com",
   author: { name: "Velocifyer" },
 };
-const collection = { name: "posts", limit: 20 };
+const collection = { name: "post", limit: 50 };
 
 
 module.exports = async function(eleventyConfig) {
