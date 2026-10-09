@@ -52,14 +52,14 @@ module.exports = async function(eleventyConfig) {
 
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "rss",
-		outputPath: "/Posts/rss.xml",
+		outputPath: "/Posts/Feeds/rss.xml",
 		collection,
 		metadata,
 	});
 
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "json",
-		outputPath: "/Posts/feed.json",
+		outputPath: "/Posts/Feeds/feed.json",
 		collection,
 		metadata,
 	});
