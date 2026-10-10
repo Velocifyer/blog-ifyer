@@ -24,6 +24,9 @@ permalink: /Blogroll.html
 - <a href="https://www.gamingonlinux.com/"   > GamingOnLinux           </a> 
 - <a href="https://itsfoss.com/"             > It's Foss!              </a> 
 - <a href="https://www.raspberrypi.com/news/"> Raspberry Pi News       </a> 	
-- <a href="https://lwn.net/"                 > LWN                     </a> 
+- <a href="https://lwn.net/"                 > LWN                     </a>
+- [Josh W^ Comeau's blog](https://www.joshwcomeau.com/)
+- [Ars Techinca](https://arstechnica.com)
+- [Ralf's Ramblings](https://www.ralfj.de/blog/)
 
 <br/>

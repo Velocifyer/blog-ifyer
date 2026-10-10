@@ -1,15 +1,19 @@
 {
-  "devDependencies": {
-    "@11ty/eleventy": "^3.1.6",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "prismjs": "^1.30.0"
-  },
-  "dependencies": {
-    "@11ty/eleventy-plugin-rss": "^3.1.0",
-    "@fontsource-variable/google-sans-flex": "^5.3.1",
-    "@zachleat/heading-anchors": "^1.0.5",
-    "html-minifier-terser": "^7.2.0",
-    "markdown-it": "^15.0.2",
-    "markdown-it-github-alerts": "^1.0.1"
-  }
+	"devDependencies": {
+		"@11ty/eleventy": "^3.1.6",
+		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+		"prismjs": "^1.30.0"
+	},
+	"dependencies": {
+		"@11ty/eleventy-plugin-rss": "^3.1.0",
+		"@fontsource-variable/google-sans-flex": "^5.3.1",
+		"@zachleat/heading-anchors": "^1.0.5",
+		"html-minifier-terser": "^7.2.0",
+		"markdown-it": "^15.0.2",
+		"markdown-it-github-alerts": "^1.0.1"
+	},
+	"scripts": {
+        "start": "ELEVENTY_ENV=development eleventy --serve",
+        "build": "ELEVENTY_ENV=production eleventy"
+    }  
 }
