@@ -2,19 +2,18 @@
 width: 600px
 uses-h3: false
 has-date: false
-subtitle: {{dates}}
 ---
 <!doctype html>
 <html lang="en-US">
     <head>
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width"/>
-		        <title>{{title}} | Blog-ifyer</title>
+		<title>{{title}} | Blog-ifyer</title>
+		<meta name="color-scheme" content="dark"/>
         <meta
             name="description"
             content="{{description}} - Blog-ifyer"
         />
-
+        <meta name="viewport" content="width=device-width"/>
         <style type="text/css"> /* Inline stylesheet */
 			{%  include "Assets/Styles/josh-css-reset.css" %}
 		</style>
@@ -22,22 +21,23 @@ subtitle: {{dates}}
 			{% include "Assets/Styles/style3.css" %}
 		</style>
         <!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
-        <!-- <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="preload" as="style"/>  -->
+		<!-- TODO: Figure out how to inline these stylesheets -->
         <link href="/Assets/Fonts/Fira/Code/2025-8-13/fira-code.css" rel="stylesheet"/>
-		<link rel="stylesheet" href="/node_modules/@fontsource-variable/google-sans-flex/wght.css">
+		<link rel="preload" href="/node_modules/@fontsource-variable/google-sans-flex/files/google-sans-flex-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
+		<link rel="stylesheet" href="/node_modules/@fontsource-variable/google-sans-flex/wght.css"/>
 
-		<link rel="stylesheet" href="/node_modules/prismjs/themes/prism-okaidia.min.css">
 
-		<link rel="stylesheet" href="/Assets/Styles/notes.css">
+		<style type="text/css">
+			{% include "node_modules/prismjs/themes/prism-okaidia.min.css" %}
+		</style>
+		<style type="text/css">
+			{% include "Assets/Styles/notes.css" %}
+		</style>
 
 		<!-- Feeds -->
 		<link rel="alternate" type="application/atom+xml" title="Atom" href="/Posts/feed.atom">
 		<link rel="alternate" type="application/rss+xml" title="RSS" href="/Posts/Feeds/rss.xml">
 		<link rel="alternate" type="application/feed+json" title="JSON Feed" href="/Posts/Feeds/feed.json">
-
-        <!-- cursorlag -->
-        <link  href="/cursorlag/cursorlag.css" rel="stylesheet"/>
-        <script src="/cursorlag/cursorlag.js" defer></script>
 
 		<!-- Better referer policy -->
 		<meta name="referrer" content="unsafe-url">
@@ -49,10 +49,6 @@ subtitle: {{dates}}
 
 		<meta name="generator" content="{{ eleventy.generator }}">
 		<link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
-		
-        <link href="/" rel="prefetch"/> 
-
-		<script defer src="https://umami.velocifyer.com/script.js" data-website-id="8b458155-4bff-4cad-9e6e-66a5d5bbb87b"></script>
     </head>
     <body>
 		<header>
@@ -69,32 +65,44 @@ subtitle: {{dates}}
   			<p>Please update your browser. We recommend Firefox 156 or something using webkit. Chromium is also ok.</p>
 		<![endif]-->
         <main>
-			<heading-anchors>
-					<h1>{{title}}</h1>
-				{% if has-dates %}
-					<vb-dates>
-						{% for date in dates %} 	
-							<time datetime="{{ date }}">{{ date }}</time>{% unless forloop.last %}, {% endunless %}
-						{% endfor %}
-					</vb-dates>
-				{% endif %}
-				{{content}}
-			</heading-anchors>
+			<article>
+				<aside class="toc">
+					<nav class="toc toc_">
+						{{content | toc}}
+					</nav>
+				</aside>
+				<heading-anchors>
+						<h1>{{ h1 | default: title }}</h1>
+					{% if has-dates %}
+						<vb-dates>
+							{% for date in dates %} 	
+								<time datetime="{{ date }}">{{ date }}</time>{% unless forloop.last %}, {% endunless %}
+							{% endfor %}
+						</vb-dates>
+					{% endif %}
+					{{content}}
+				</heading-anchors>
+			</article>
         </main>
 
 		<!-- Heading Anchors -->
 		<script type="module" src="/node_modules/@zachleat/heading-anchors/heading-anchors.js" async></script>
+		<!-- Simple analytics -->
+		<script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+		<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
+		<!-- Umami analytics -->
+		<script defer src="https://umami.velocifyer.com/script.js" data-website-id="8b458155-4bff-4cad-9e6e-66a5d5bbb87b"></script>
 
         <footer>
             <small>
-                <a href="/Posts/feed.atom"     >Atom Feed</a> <a href="/Posts/Feeds/rss.xml">RSS feed</a> <a href="/Posts/Feeds/feed.json">JSON feed</a> <br/>
+                <a href="/Posts/feed.atom" data-no-instant>Atom Feed</a> <a href="/Posts/Feeds/rss.xml" data-no-instant>RSS feed</a> <a href="/Posts/Feeds/feed.json" data-no-instant>JSON feed</a> <br/>
                 <a href="/Blogroll.html">Blogroll </a><br/>
                 To contact Velocifyer, email veolcifyer [at​] velocifyer[.]com, but fixing the type based on the domain (to stop bots).<br/>
                 Velocifyer's OpenPGP Certificate is <a href="/pgp-certificate.asc">1BA0 FC4B 80E0 F21B 0269 8CEE 634E BF87 40C7 48BE</a>.<br/>
                 Except for the favicon and javascript and the fonts, this is licensed <nobr id="footer-license">CC-BY-SA 4.0 𝕍𝕖𝕝𝕠𝕔𝕚𝕗𝕪𝕖𝕣</nobr>.<br/>
                 One of the fonts used on this website is Google Sans Flex, which uses <a href="/node_modules/@fontsource-variable/google-sans-flex/LICENSE">this license</a>.<br/>
                 One of the fonts used on this website is Fira Code, which uses <a href="/Assets/Fonts/Fira/Code/2025-8-13/LICENSE.TXT">This license</a>.<br/>
-                The cursor used in this website is from the breeze theme. See <a href="https://github.com/KDE/breeze/tree/master/cursors/Breeze">this</a> for license details and commit history.<br/>
+				<a href="https://github.com/KDE/breeze/tree/master/cursors/Breeze" class="non_colored">The cursor used in this website is from the breeze theme. See <span class="colored">this</span> for license details and commit history.</a><br/>
                 This website is available on <a href="https://codeberg.org/Velocifyer/Blog-ifyer">Codeberg</a>. Make an issue or merge request if it would be useful.<br/>
 				Please disable your ad or tracker blocker to allow our private analytics to run.<br/>
 				This website uses <a href="https://www.simpleanalytics.com/">Simple Analytics</a>. This means that we collect "anonymous usage data", including page views and browser versions.<br/>
@@ -103,16 +111,21 @@ subtitle: {{dates}}
 
 				<vb-badges>
 					<a href="https://dashboard.simpleanalytics.com/?utm_source=blog.velocifyer.com&utm_content=badge&affiliate=dubev" referrerpolicy="origin" target="_blank" fetchpriority="low">
-						<img src="https://simpleanalyticsbadges.com/blog.velocifyer.com?mode=dark?counter=true" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" height="50" width="210" role="img" alt="This Website uses Simple Analytics" type="image/svg+xml"/>
+						<img src="https://simpleanalyticsbadges.com/blog.velocifyer.com?mode=dark?counter=true" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous"  role="img" alt="This Website uses Simple Analytics" type="image/svg+xml"/>
 					</a>
 					<a href="https://firefox.com">
 						<img src="/Assets/Images/Badges/tested on Firefox.gif" loading="lazy" type="image/gif" alt="This website is tested on Firefox."/>
 					</a>
+					<a href="https://mastodon.social/@Velocifyer"><img src="/Assets/Images/Badges/Follow me on Mastadon.png" alt="Follow me on Mastadon" loading="lazy"/></a>
 				</vb-badges>
             </small>
         </footer>
-		<!-- Simple analytics -->
-		<script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-		<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
+		<!-- cursorlag -->
+        <link  href="/cursorlag/cursorlag.css" rel="stylesheet"/>
+        <script src="/cursorlag/cursorlag.js" defer></script>
+		<!-- Instant.page -->
+		<script type="module">
+			{%  include "Assets/Scripts/Instant[.]page/5.2.0-instant.js" %}
+		</script>
     </body>
 </html>

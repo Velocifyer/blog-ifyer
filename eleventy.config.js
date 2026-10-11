@@ -5,6 +5,9 @@ const { HtmlBasePlugin } = require("@11ty/eleventy");
 const MarkdownItGitHubAlertsModule = require("markdown-it-github-alerts");
 const MarkdownItGitHubAlerts = MarkdownItGitHubAlertsModule.default ?? MarkdownItGitHubAlertsModule;
 const htmlmin = require("html-minifier-terser");
+const pluginTOCModule = require('@uncenter/eleventy-plugin-toc');
+const pluginTOC = pluginTOCModule.default ?? pluginTOCModule;
+const markdownItAnchor = require("markdown-it-anchor");
 
 
 const metadata = {
@@ -38,10 +41,9 @@ module.exports = async function(eleventyConfig) {
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
 		preAttributes: { tabindex: 0 }   // makes scrollable code blocks keyboard-accessible
 	});
-	eleventyConfig.addWatchTarget("**/*.css");
-	eleventyConfig.addPassthroughCopy("node_modules/prismjs/themes/*.css");
 	eleventyConfig.addPassthroughCopy("node_modules/@zachleat/heading-anchors/*");
 	eleventyConfig.addPassthroughCopy("robots.txt");
+	eleventyConfig.addPassthroughCopy("*.asc");
 
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "atom",
@@ -66,7 +68,7 @@ module.exports = async function(eleventyConfig) {
 
 	eleventyConfig.amendLibrary("md", (mdLib) => {
 		mdLib.use(MarkdownItGitHubAlerts);
-		console.log("[alerts]", mdLib.render("> [!NOTE]\n> hi\n"));
+		mdLib.use(markdownItAnchor);
 	});
 	eleventyConfig.addPlugin(IdAttributePlugin, {
 		// slugify: eleventyConfig.getFilter("slugify"), // default
@@ -80,11 +82,21 @@ module.exports = async function(eleventyConfig) {
 		}
 
 		if ((this.page.outputPath || "").endsWith(".html")) {
-			return await htmlmin.minify(content, { /* options */ });
+			return await htmlmin.minify(content, {
+				collapseWhitespace: true,
+				removeComments: false,
+				//TODO: Fix it removing CSS comments
+				minifyCSS: true,
+				minifyCSS: true,
+				minifyJS: true,
+			});
 		}
 
 		return content;
 	});
+
+	
+	eleventyConfig.addPlugin(pluginTOC);
 
 	return {
 

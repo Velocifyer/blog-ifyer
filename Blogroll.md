@@ -28,5 +28,4 @@ permalink: /Blogroll.html
 - [Josh W^ Comeau's blog](https://www.joshwcomeau.com/)
 - [Ars Techinca](https://arstechnica.com)
 - [Ralf's Ramblings](https://www.ralfj.de/blog/)
-
-<br/>
+- [Enki Research](https://enkiops.org/blog/)
