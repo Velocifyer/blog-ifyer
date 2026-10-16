@@ -1,0 +1,76 @@
+/* CSS hacks for old browsers */
+/* iOS 4, MacOS 15(including safari updates), Switch HOS Version 1.0.0 (WebKit based), Wii U browser, New 3DS Browser, Firefox 156,
+	 Chromium (last 2 years), Switch 2 HOS, FireFox android (last 2 years) */
+
+/* New elements */
+article,
+aside,
+figcaption,
+footer,
+header,
+hgroup,
+main,
+nav,
+search,
+section,
+summary {
+  	display: block;
+}
+
+/* Fix H1 in <article> */
+h1 {
+	display: block;
+	font-size: 2em;
+	font-weight: bold;
+	margin: 0.67em 0;
+}
+
+/* Hopefully this isn't needed */
+[hidden] {
+    display: none;
+}
+
+/* Fix IE */
+img {
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+
+/* New semantic elements */
+b,
+strong {
+ 	 font-weight: bolder;
+}
+i,
+cite,
+em,
+var,
+dfn {
+  	font-style: italic;
+}
+u,
+ins {
+  text-decoration: underline;
+}
+s,
+strike,
+del {
+  text-decoration: line-through;
+}
+
+/* This element is to be deprecated, so I am keeping the CSS here */
+nobr,
+no-break {
+  white-space: nowrap;
+}
+
+
+
+/* Improve line wrapping */
+/* Technically this is not a hack, but I still prefer it */
+p {
+	text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+ 	text-wrap: balance;
+}

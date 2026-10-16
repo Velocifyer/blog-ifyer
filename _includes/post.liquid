@@ -14,10 +14,13 @@ has-date: false
             content="{{description}} - Blog-ifyer"
         />
         <meta name="viewport" content="width=device-width"/>
-        <style type="text/css"> /* Inline stylesheet */
+		<style>
+			{% include "Assets/Styles/hacks.css" %}
+		</style>
+        <style> /* Inline stylesheet */
 			{%  include "Assets/Styles/josh-css-reset.css" %}
 		</style>
-		<style type="text/css">
+		<style>
 			{% include "Assets/Styles/style3.css" %}
 		</style>
         <!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
@@ -27,16 +30,16 @@ has-date: false
 		<link rel="stylesheet" href="/node_modules/@fontsource-variable/google-sans-flex/wght.css"/>
 
 
-		<style type="text/css">
+		<style>
 			{% include "node_modules/prismjs/themes/prism-okaidia.min.css" %}
 		</style>
-		<style type="text/css">
+		<style>
 			{% include "Assets/Styles/notes.css" %}
 		</style>
 
 		<!-- Feeds -->
-		<link rel="alternate" type="application/atom+xml" title="Atom" href="/Posts/feed.atom">
-		<link rel="alternate" type="application/rss+xml" title="RSS" href="/Posts/Feeds/rss.xml">
+		<link rel="alternate" type="application/atom+xml"  title="Atom Feed" href="/Posts/feed.atom"      >
+		<link rel="alternate" type="application/rss+xml"   title="RSS Feed" href="/Posts/Feeds/rss.xml"   >
 		<link rel="alternate" type="application/feed+json" title="JSON Feed" href="/Posts/Feeds/feed.json">
 
 		<!-- Better referer policy -->
@@ -49,6 +52,13 @@ has-date: false
 
 		<meta name="generator" content="{{ eleventy.generator }}">
 		<link rel="icon" href="/Assets/Images/spacetoad.jpg" type="image/jpeg"/>
+
+		<!-- HTML5 shiv.
+		 	Fixes old IE
+		-->
+		<!--[if lt IE 9]>
+			<script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+		<![endif]-->
     </head>
     <body>
 		<header>
@@ -86,7 +96,9 @@ has-date: false
         </main>
 
 		<!-- Heading Anchors -->
-		<script type="module" src="/node_modules/@zachleat/heading-anchors/heading-anchors.js" async></script>
+		<script type="module">
+			{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}
+		</script>
 		<!-- Simple analytics -->
 		<script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 		<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
@@ -110,7 +122,7 @@ has-date: false
                 <noscript><br/>Congratulations, this website does not need JavaScript! Turn on JavaScript to get a cool cursor effect!</noscript>
 
 				<vb-badges>
-					<a href="https://dashboard.simpleanalytics.com/?utm_source=blog.velocifyer.com&utm_content=badge&affiliate=dubev" referrerpolicy="origin" target="_blank" fetchpriority="low">
+					<a href="https://dashboard.simpleanalytics.com/?utm_source=blog.velocifyer.com&utm_content=badge&affiliate=dubev" referrerpolicy="origin" target="_blank"	>
 						<img src="https://simpleanalyticsbadges.com/blog.velocifyer.com?mode=dark?counter=true" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous"  role="img" alt="This Website uses Simple Analytics" type="image/svg+xml"/>
 					</a>
 					<a href="https://firefox.com">
@@ -122,7 +134,9 @@ has-date: false
         </footer>
 		<!-- cursorlag -->
         <link  href="/cursorlag/cursorlag.css" rel="stylesheet"/>
-        <script src="/cursorlag/cursorlag.js" defer></script>
+        <script>
+			{% include "cursorlag/cursorlag.js" %}
+		</script>
 		<!-- Instant.page -->
 		<script type="module">
 			{%  include "Assets/Scripts/Instant[.]page/5.2.0-instant.js" %}
