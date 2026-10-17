@@ -190,9 +190,10 @@ heading-anchors:not(:defined) :is(h2,h3,h4,h5,h6):after {
 vb-badges  img {
 	display: inline;
 	height: 31px;
-	width: 88px;
+	width: auto;
 	object-fit: cover;
 	display: crisp-edges;
+	aspect-ratio: auto;
 }
 
 img.crisp-edges {
