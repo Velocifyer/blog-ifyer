@@ -2,12 +2,13 @@
 title: How to set up secure boot (with your own keys) and lockdown mode and TPM based storage decryption on Arch Linux
 dates:
   - "2025-11-21"
-  - "2026-2-25"
+  - "2026-02-25"
 tags: post
 layout: post
 description: "Make your system more secure!"
 width: 55em
 has-dates: true
+date: 2026-02-25
 ---
 
 Normaly on arch linux there is no way to know wheater someone took out your ssd and modified the files on the ESP or the root partition.

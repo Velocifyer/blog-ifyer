@@ -8,6 +8,7 @@ layout: post
 description: "Idiots want DRM on live TV."
 width: 55em
 has-dates: true
+date: 2026-03-09
 ---
 
     Currently most ATSC 3.0 signals from major networks like NBC have DRM. This is annoying becuase DRM is bad.

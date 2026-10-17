@@ -10,6 +10,7 @@ layout: post
 description: "Here's how to self-host a web font from Google Fonts"
 width: 53em
 has-dates: true
+date: 2026-10-08
 ---
 
 A common place to get a web font is <a href="https://fonts.google.com/" referrerpolicy="no-referrer">Google Fonts</a>.

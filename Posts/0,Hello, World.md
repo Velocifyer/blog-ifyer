@@ -4,6 +4,7 @@ dates: "2025-09+09"
 tags: post
 layout: post
 has-dates: true
+date: 2025-09-09
 ---
 Welcome to my blog!
 

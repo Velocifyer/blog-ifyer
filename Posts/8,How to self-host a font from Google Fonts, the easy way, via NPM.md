@@ -6,6 +6,7 @@ tags: post
 layout: post
 has-dates: true
 description: "Self hosting a font with NPM is way easier than doing it the normal way."
+date: 2026-10-08
 ---
 In one of my previous posts (<a href="/Posts/3,How to self host a font from google fonts/">How to self host a web font from google fonts</a>) ,
  I taught you how to do it manually.
