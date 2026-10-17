@@ -30,3 +30,4 @@ permalink: /Blogroll.html
 - [Ralf's Ramblings](https://www.ralfj.de/blog/) ([RSS Feed](https://www.ralfj.de/blog/feed.xml))
 - [Enki Research](https://enkiops.org/blog/) ([RSS Feed](https://enkiops.org/feed/))
 - [Tailscale Blog](https://tailscale.com/blog) ([RSS feed](https://tailscale.com/blog/index.xml))
+- [Simple Analytics blog](https://www.simpleanalytics.com/blog) ([Atom Feed](https://www.simpleanalytics.com/feed.xml))
