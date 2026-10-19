@@ -32,3 +32,4 @@ permalink: /Blogroll.html
 - [Tailscale Blog](https://tailscale.com/blog) ([RSS feed](https://tailscale.com/blog/index.xml))
 - [Simple Analytics blog](https://www.simpleanalytics.com/blog) ([Atom Feed](https://www.simpleanalytics.com/feed.xml))
 - [Libreboot news](https://libreboot.org/news/) ([RSS Feed](https://libreboot.org/news/feed.xml))
+- [Nintendo Life](https://www.nintendolife.com/) ([RSS Feed](https://www.nintendolife.com/feeds/latest))
