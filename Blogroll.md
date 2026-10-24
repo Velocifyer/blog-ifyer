@@ -33,3 +33,4 @@ permalink: /Blogroll.html
 - [Simple Analytics blog](https://www.simpleanalytics.com/blog) ([Atom Feed](https://www.simpleanalytics.com/feed.xml))
 - [Libreboot news](https://libreboot.org/news/) ([RSS Feed](https://libreboot.org/news/feed.xml))
 - [Nintendo Life](https://www.nintendolife.com/) ([RSS Feed](https://www.nintendolife.com/feeds/latest))
+- [Arch Linux News](https://archlinux.org) ([RSS Feed](https://archlinux.org/feeds/news/))
