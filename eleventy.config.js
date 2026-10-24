@@ -37,7 +37,7 @@ module.exports = async function(eleventyConfig) {
             return `<time datetime="${date}">${date}</time>`;
         }).join(", ");
     });
-	eleventyConfig.addPassthroughCopy("node_modules/@fontsource-variable/google-sans-flex/**");
+	eleventyConfig.addPassthroughCopy("node_modules/@fontsource-variable/**");
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
 		preAttributes: { tabindex: 0 }   // makes scrollable code blocks keyboard-accessible
 	});
