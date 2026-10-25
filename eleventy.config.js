@@ -48,7 +48,7 @@ module.exports = async function(eleventyConfig) {
 
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "atom",
-		outputPath: "/Posts/feed.atom",   // <-- put your OLD Atom URL here
+		outputPath: "/Posts/feed.atom",
 		collection,
 		metadata,
 	});
@@ -86,7 +86,7 @@ module.exports = async function(eleventyConfig) {
 			return await htmlmin.minify(content, {
 				collapseWhitespace: true,
 				removeComments: false,
-				//TODO: Fix it removing CSS comments
+				//TODO: Fix it removing CSS comments or add sourcemaps
 				minifyCSS: true,
 				minifyCSS: true,
 				minifyJS: true,
