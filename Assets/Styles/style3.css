@@ -33,28 +33,13 @@ body {
     border: 5px solid black;
 }
 
-/* The big title at the top of the page */
-div.bigtitle#bigtitle {
-    display: block;
-    font-size: 2em;
-    font-weight: bold;
-    margin-block: 0.67em;
-    font-size: 60px;
-    text-align: center;
-    margin: 0;
-    padding: 20px 0;
-    color: #00539f;
-    background-color: #000000;
-    text-shadow: 3px 3px 1px black;
-}
-
 p{
     /* line-height: 1.25; */
     margin: 1em 0;
 }
 li {
     /* letter-spacing: 1px; */
-    font-size: 16px;
+    font-size: 0.93em;
     /* line-height: 2; */
     margin: 0.1em;
     padding: 0;
@@ -204,7 +189,7 @@ a > .colored {
 }
 
 aside.toc {
-		float: right;
-		width: 14em;
+	float: right;
+	width: 14em;
 }
 
