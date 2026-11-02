@@ -8,6 +8,7 @@ const htmlmin = require("html-minifier-terser");
 const pluginTOCModule = require('@uncenter/eleventy-plugin-toc');
 const pluginTOC = pluginTOCModule.default ?? pluginTOCModule;
 const markdownItAnchor = require("markdown-it-anchor");
+const eleventyAutoCacheBuster = require("eleventy-auto-cache-buster");
 
 
 const metadata = {
@@ -97,6 +98,10 @@ module.exports = async function(eleventyConfig) {
 
 	
 	eleventyConfig.addPlugin(pluginTOC);
+    eleventyConfig.addPlugin(eleventyAutoCacheBuster, {
+        hashTruncate: 0,  // Desired substring length of the hash. Set to 0 or lower to disable truncating
+        hashAlgorithm: "sha256",  // What hash method to pass to the hash function. See Node.js' crypto.createHash documentation.
+    });
 
 	return {
 
