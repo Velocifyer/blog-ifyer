@@ -46,6 +46,7 @@ module.exports = async function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("robots.txt");
 	eleventyConfig.addPassthroughCopy("*.asc");
 	eleventyConfig.addPassthroughCopy("node_modules/html5shiv/**");
+	eleventyConfig.addPassthroughCopy("_headers");
 
 	eleventyConfig.addPlugin(feedPlugin, {
 		type: "atom",
