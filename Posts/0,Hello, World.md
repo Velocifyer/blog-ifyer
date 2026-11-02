@@ -1,6 +1,6 @@
 ---
 title: Hello, World
-dates: "2025-09+09"
+dates: "2025-09-09"
 tags: post
 layout: post
 has-dates: true

@@ -88,7 +88,6 @@ module.exports = async function(eleventyConfig) {
 				removeComments: false,
 				//TODO: Fix it removing CSS comments or add sourcemaps
 				minifyCSS: true,
-				minifyCSS: true,
 				minifyJS: true,
 			});
 		}
