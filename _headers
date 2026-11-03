@@ -1,2 +1,23 @@
 /*
-	Cache-Control: public, max-age=300, s-maxage=300
+  Cache-Control: public, max-age=300, s-maxage=300
+
+/cursorlag/cursorlag.css
+    Cache-Control: public, max-age=31536000, immutable
+
+/node_modules/@fontsource-variable/fira-code/wght.css
+    Cache-Control: public, max-age=31536000, immutable
+
+/node_modules/@fontsource-variable/google-sans-flex/wght.css
+    Cache-Control: public, max-age=31536000, immutable
+
+/node_modules/html5shiv/dist/html5shiv-printshiv.min.js
+    Cache-Control: public, max-age=31536000, immutable
+
+/Assets/Images/spacetoad.jpg
+    Cache-Control: public, max-age=31536000, immutable
+
+/Assets/Images/Badges/tested*
+    Cache-Control: public, max-age=31536000, immutable
+
+/Assets/Images/Badges/Follow*
+    Cache-Control: public, max-age=31536000, immutable
