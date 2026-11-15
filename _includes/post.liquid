@@ -14,13 +14,8 @@ has-date: false
             content="{{description}} - Blog-ifyer"
         />
         <meta name="viewport" content="width=device-width"/>
-		<link rel="preload" href="/cursorlag/cursorlag.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-		<!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
-		<!-- TODO: Figure out how to inline these stylesheets -->
 		<link rel="preload" href="/node_modules/@fontsource-variable/google-sans-flex/files/google-sans-flex-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
-        <link href="/node_modules/@fontsource-variable/fira-code/wght.css" rel="stylesheet"/>
-		<link rel="stylesheet" href="/node_modules/@fontsource-variable/google-sans-flex/wght.css"/>
 
 		<!-- Simple analytics -->
 		<script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
@@ -30,20 +25,20 @@ has-date: false
 		<!-- <script defer src="https://umami.velocifyer.com/script.js" data-website-id="8b458155-4bff-4cad-9e6e-66a5d5bbb87b"></script> -->
 
 		<style> /* Compatability with older browsers */
-			{% include "Assets/Styles/hacks.css" %}
+			{% inlineCss"Assets/Styles/hacks.css" %}
 		</style>
         <style> /* Extra CSS fancyness */
-			{%  include "Assets/Styles/josh-css-reset.css" %}
+			{%  inlineCss"Assets/Styles/josh-css-reset.css" %}
 		</style>
 		<style> /* Main stylesheet */
-			{% include "Assets/Styles/style3.css" %}
+			{% inlineCss "Assets/Styles/style3.css" %}
 		</style>
 
 		<style> /* Code blocks */
-			{% include "node_modules/prismjs/themes/prism-okaidia.min.css" %}
+			{% inlineCss "node_modules/prismjs/themes/prism-okaidia.css" %}
 		</style>
 		<style> /* Markdown Notes */
-			{% include "Assets/Styles/notes.css" %}
+			{% inlineCss "Assets/Styles/notes.css" %}
 		</style>
 
 		<!-- Feeds -->
@@ -157,11 +152,23 @@ has-date: false
 				</vb-badges>
             </small>
         </footer>
+		<!-- Fonts -->
+		<style>
+			{% inlineCss "node_modules/@fontsource-variable/google-sans-flex/wght.css" %}
+		</style>
+		
+		<!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
+		<style>
+			{% inlineCss "node_modules/@fontsource-variable/fira-code/wght.css" %}
+		</style>
 		<!-- cursorlag -->
         <!-- Stylesheet is above -->
         <script>
 			{% include "cursorlag/cursorlag.js" %}
 		</script>
+		<style>
+			{% inlineCss "cursorlag/cursorlag.css" %}
+		</style>
 		<!-- Instant.page -->
 		<script type="module">
 			{% include "Assets/Scripts/Instant[.]page/5.2.0-instant.js" %}

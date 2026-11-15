@@ -21,3 +21,6 @@
 
 /Assets/Images/Badges/Follow*
     Cache-Control: public, max-age=31536000, immutable
+
+/sourcemaps
+    Cache-Control: public, max-age=31536000, immutable

@@ -1,24 +1,23 @@
 :root {
-	--color-gray-20: #e0e0e0;
-	--color-gray-50: #C0C0C0;
-	--color-gray-90: #dad8d8;
+	--flatten-color-gray-20: #e0e0e0;
+	--flatten-color-gray-50: #C0C0C0;
+	--flatten-color-gray-90: #dad8d8;
 
-	--text-color-link: #0ba1ff;
-	--text-color-link-active: #6969f7;
-	--text-color-link-visited: #569ace;
-	--text-color: var(--color-gray-90);
-	--background-color: #15202b;
+	--flatten-text-color-link: #0ba1ff;
+	--flatten-text-color-link-active: #6969f7;
+	--flatten-text-color-link-visited: #569ace;
+	--flatten-text-color: var(--flatten-color-gray-90);
+	--flatten-background-color: #15202b;
 
-	--syntax-tab-size: 4;
+	--flatten-syntax-tab-size: 4;
 }
 
 html,
 body {
 	padding: 1px;
 	margin: 1%;
-	font-family: var(--font-family);
-	color: var(--text-color);
-	background-color: var(--background-color);
+	color: var(--flatten-text-color);
+	background-color: var(--flatten-background-color);
 }
 html {
 	overflow-y: scroll;
@@ -63,14 +62,14 @@ code {
     word-break: break-all;
 }
 a[href] {
-	color: var(--text-color-link);
+	color: var(--flatten-text-color-link);
 }
 a[href]:visited {
-	color: var(--text-color-link-visited);
+	color: var(--flatten-text-color-link-visited);
 }
 a[href]:hover,
 a[href]:active {
-	color: var(--text-color-link-active);
+	color: var(--flatten-text-color-link-active);
 }
 
 /* Fluid images via https://www.zachleat.com/web/fluid-images/ */
@@ -95,7 +94,7 @@ iframe {
 }
 
 footer {
-  	border-top: 1px solid var(--color-gray-90);
+  	border-top: 1px solid var(--flatten-color-gray-90);
 	margin-top: 8px;
 	padding: 8px;
 }
@@ -119,7 +118,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1em;
-	border-bottom: 1px dashed var(--color-gray-20);
+	border-bottom: 1px dashed var(--flatten-color-gray-20);
 	margin: 1em
 
 }
@@ -180,12 +179,12 @@ img.crisp-edges {
 }
 
 a.non_colored {
-	color: var(--text-color);
+	color: var(--flatten-text-color);
 	text-decoration: none;
 }
 
 a > .colored {
-	color: var(--text-color-link)
+	color: var(--flatten-text-color-link)
 }
 
 aside.toc {
