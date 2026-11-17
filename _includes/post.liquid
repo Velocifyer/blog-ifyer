@@ -106,11 +106,6 @@ has-date: false
 			</article>
         </main>
 
-		<!-- Heading Anchors -->
-		<script type="module">
-			{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}
-		</script>
-
         <footer>
 			<search>
 				<form method="get" action="https://www.mojeek.com/search">
@@ -153,25 +148,35 @@ has-date: false
             </small>
         </footer>
 		<!-- Fonts -->
+		<!-- Google Sans Flex -->
 		<style>
 			{% inlineCss "node_modules/@fontsource-variable/google-sans-flex/wght.css" %}
 		</style>
-		
 		<!-- TODO: Figure out how to only load the font face definitions on pages that use the fonts. -->
+		<!-- Fira Code -->
 		<style>
 			{% inlineCss "node_modules/@fontsource-variable/fira-code/wght.css" %}
 		</style>
 		<!-- cursorlag -->
         <!-- Stylesheet is above -->
         <script>
-			{% include "cursorlag/cursorlag.js" %}
+			{% inlineJs "cursorlag/cursorlag.js" %}
 		</script>
 		<style>
 			{% inlineCss "cursorlag/cursorlag.css" %}
 		</style>
 		<!-- Instant.page -->
 		<script type="module">
-			{% include "Assets/Scripts/Instant[.]page/5.2.0-instant.js" %}
+			{% inlineJs "Assets/Scripts/Instant[.]page/5.2.0-instant.js" %}
 		</script>
+
+		<!-- Super legacy Google Sans Flex static fallback -->
+
+		<style>
+			{% inlineCss "Assets/Fonts/Google Sans Flex/400.css" %}
+		</style>
+		<style>
+			{% inlineCss "Assets/Fonts/Google Sans Flex/700.css" %}
+		</style>
     </body>
 </html>

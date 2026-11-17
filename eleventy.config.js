@@ -12,6 +12,8 @@ const eleventyAutoCacheBuster = require("eleventy-auto-cache-buster");
 const fs = require("node:fs");
 const path = require("node:path");
 const { transform } = require("lightningcss");
+const CleanCSS = require("clean-css");
+const { minify: minifyJs } = require("terser");
 const { minify } = require("html-minifier-terser");
 const crypto = require("node:crypto");
 const MAP_DIR = "sourcemaps";
@@ -43,81 +45,6 @@ function absolutizeUrl(url, cssDir, inputDir) {
 
     return "/" + relative.split(path.sep).join("/") + match[2];
 }
-const FLATTEN_PREFIX = "--flatten-";
-
-const isWhitespace = (token) => token.type === "token" && token.value.type === "white-space";
-
-function trimTokens(tokens) {
-    let start = 0;
-    let end = tokens.length;
-
-    while (start < end && isWhitespace(tokens[start])) {
-        start++;
-    }
-
-    while (end > start && isWhitespace(tokens[end - 1])) {
-        end--;
-    }
-
-    return tokens.slice(start, end);
-}
-function collectFlattened(code, filename) {
-    const definitions = new Map();
-
-    transform({
-        filename,
-        code,
-        visitor: {
-            Declaration: {
-                custom(property) {
-                    if (!property.name.startsWith(FLATTEN_PREFIX)) {
-                        return;
-                    }
-
-                    const value = trimTokens(property.value);
-                    const previous = definitions.get(property.name);
-
-                    if (previous && JSON.stringify(previous) !== JSON.stringify(value)) {
-                        console.warn(`inlineCss: ${property.name} is defined more than once in ${filename}, the last definition is used`);
-                    }
-
-                    definitions.set(property.name, value);
-                },
-            },
-        },
-    });
-
-    return definitions;
-}
-
-function expandTokens(tokens, definitions, filename, trail = []) {
-    return tokens.flatMap((token) => {
-        if (token.type !== "var") {
-            return [token];
-        }
-
-        const name = token.value.name.ident;
-
-        if (!name.startsWith(FLATTEN_PREFIX)) {
-            return [token];
-        }
-
-        if (trail.includes(name)) {
-            throw new Error(`inlineCss: circular reference through ${name} in ${filename}`);
-        }
-
-        if (definitions.has(name)) {
-            return expandTokens(definitions.get(name), definitions, filename, [...trail, name]);
-        }
-
-        if (token.value.fallback) {
-            return expandTokens(token.value.fallback, definitions, filename, [...trail, name]);
-        }
-
-        console.warn(`inlineCss: ${name} is used in ${filename} but never defined, left unchanged`);
-        return [token];
-    });
-}
 
 
 module.exports = async function(eleventyConfig) {
@@ -127,20 +54,36 @@ module.exports = async function(eleventyConfig) {
     let inputDir = null;
     let includesDir = null;
     let outputDir = null;
-	function resolveCssFile(file) {
-    const candidates = [
-        path.resolve(includesDir, file),
-        path.resolve(inputDir, file),
-    ];
 
-    const found = candidates.find((candidate) => fs.existsSync(candidate));
+    function resolveAssetFile(file) {
+        const relativeFile = file.replace(/^\/+/, "");
+        const candidates = [
+            path.resolve(includesDir, relativeFile),
+            path.resolve(inputDir, relativeFile),
+        ];
 
-    if (!found) {
-        throw new Error(`inlineCss: "${file}" not found. Looked in:\n${candidates.join("\n")}`);
+        const found = candidates.find((candidate) => fs.existsSync(candidate));
+
+        if (!found) {
+            throw new Error(`inline asset: "${file}" not found. Looked in:\n${candidates.join("\n")}`);
+        }
+
+        return found;
     }
 
-    return found;
-}
+    function writeMap(map, file, extension) {
+        const hash = crypto.createHash("sha256").update(map).digest("hex").slice(0, 12);
+        const mapName = `${MAP_DIR}/${path.basename(file, extension)}.${hash}${extension}.map`;
+
+        if (!written.has(mapName)) {
+            const mapPath = path.join(outputDir, mapName);
+            fs.mkdirSync(path.dirname(mapPath), { recursive: true });
+            fs.writeFileSync(mapPath, map);
+            written.add(mapName);
+        }
+
+        return mapName;
+    }
 
     eleventyConfig.on("eleventy.before", ({ dir }) => {
         inputDir = path.resolve(dir.input);
@@ -157,16 +100,22 @@ module.exports = async function(eleventyConfig) {
         written.clear();
     });
 
-	 eleventyConfig.addShortcode("inlineCss", function (file) {
-        const filename = resolveCssFile(file);
-        const sourceName = path.relative(inputDir, filename).split(path.sep).join("/");
-        const code = fs.readFileSync(filename);
-        const definitions = collectFlattened(code, sourceName);
+    const cleaner = new CleanCSS({
+        level: 0,
+        rebase: false,
+        inline: false,
+        sourceMap: true,
+        sourceMapInlineSources: true,
+    });
 
-        const result = transform({
+    eleventyConfig.addShortcode("inlineCss", function (file) {
+        const filename = resolveAssetFile(file);
+        const sourceName = path.relative(inputDir, filename).split(path.sep).join("/");
+
+        const rewritten = transform({
             filename: sourceName,
-            code,
-            minify: true,
+            code: fs.readFileSync(filename),
+            minify: false,
             sourceMap: true,
             visitor: {
                 Url(url) {
@@ -175,40 +124,41 @@ module.exports = async function(eleventyConfig) {
                         url: absolutizeUrl(url.url, path.dirname(filename), inputDir),
                     };
                 },
-                Variable(variable) {
-                    if (!variable.name.ident.startsWith(FLATTEN_PREFIX)) {
-                        return;
-                    }
-
-                    return expandTokens([{ type: "var", value: variable }], definitions, sourceName);
-                },
-                Declaration: {
-                    custom(property) {
-                        if (property.name.startsWith(FLATTEN_PREFIX)) {
-                            return [];
-                        }
-                    },
-                },
             },
         });
 
-        const hash = crypto
-            .createHash("sha256")
-            .update(result.map)
-            .digest("hex")
-            .slice(0, 12);
-        const mapName = `${MAP_DIR}/${path.basename(file, ".css")}.${hash}.css.map`;
+        const output = cleaner.minify({
+            [sourceName]: {
+                styles: rewritten.code.toString(),
+                sourceMap: rewritten.map.toString(),
+            },
+        });
 
-        if (!written.has(mapName)) {
-            const mapPath = path.join(outputDir, mapName);
-            fs.mkdirSync(path.dirname(mapPath), { recursive: true });
-            fs.writeFileSync(mapPath, result.map);
-            written.add(mapName);
+        if (output.errors.length > 0) {
+            throw new Error(`inlineCss: ${sourceName}\n${output.errors.join("\n")}`);
         }
 
-        const css = result.code.toString().trim();
+        const mapName = writeMap(output.sourceMap.toString(), file, ".css");
 
-        return `${css}\n/*# sourceMappingURL=/${mapName} */`;
+        return `${output.styles.trim()}\n/*# sourceMappingURL=/${mapName} */`;
+    });
+
+    eleventyConfig.addAsyncShortcode("inlineJs", async function (file) {
+        const filename = resolveAssetFile(file);
+        const sourceName = path.relative(inputDir, filename).split(path.sep).join("/");
+
+        const result = await minifyJs(
+            { [sourceName]: fs.readFileSync(filename, "utf8") },
+            {
+                compress: false,
+                mangle: false,
+                sourceMap: { includeSources: true },
+            },
+        );
+
+        const mapName = writeMap(result.map, file, ".js");
+
+        return `${result.code}\n//# sourceMappingURL=/${mapName}`;
     });
 
 	eleventyConfig.addPlugin(HtmlBasePlugin);
