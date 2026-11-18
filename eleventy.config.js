@@ -180,6 +180,8 @@ module.exports = async function(eleventyConfig) {
 		preAttributes: { tabindex: 0 }   // makes scrollable code blocks keyboard-accessible
 	});
 	eleventyConfig.addPassthroughCopy("node_modules/@zachleat/heading-anchors/*");
+
+	eleventyConfig.addPassthroughCopy("node_modules/@fontsource/**");
 	eleventyConfig.addPassthroughCopy("robots.txt");
 	eleventyConfig.addPassthroughCopy("*.asc");
 	eleventyConfig.addPassthroughCopy("node_modules/html5shiv/**");
