@@ -4,6 +4,7 @@ body {
     margin: 1%;
     color: #dad8d8;
     background-color: #15202b;
+    background-image: url(/Assets/Images/Backgrounds/3px-tile.png);
 }
 html {
 	overflow-y: scroll;
